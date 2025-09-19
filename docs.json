@@ -2318,6 +2318,272 @@
           ]
         }
       ]
+    },
+    {
+      "file": "README.md",
+      "summary": "Node.js backend for the 'Take iT & Go' peer-to-peer delivery platform, featuring user authentication, route matching, mock payments, GPS tracking, and real-time chat.",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/api/auth/signup",
+          "summary": "Register a new user",
+          "request": {
+            "body": {
+              "email": "string",
+              "phone": "string",
+              "password": "string",
+              "role": "string (optional, default: 'shipper')"
+            }
+          },
+          "response": {
+            "200": {
+              "user": "object",
+              "token": "string"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/login",
+          "summary": "Log in an existing user",
+          "request": {
+            "body": {
+              "email": "string",
+              "password": "string"
+            }
+          },
+          "response": {
+            "200": {
+              "user": "object",
+              "token": "string"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/reset-password",
+          "summary": "Reset user's password",
+          "request": {
+            "body": {
+              "email": "string",
+              "newPassword": "string"
+            }
+          },
+          "response": {
+            "200": {
+              "message": "string"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/match/find",
+          "summary": "Find potential matches for a delivery (Protected)",
+          "request": {
+            "body": {
+              "deliveryId": "string"
+            }
+          },
+          "response": {
+            "200": {
+              "delivery": "object",
+              "matches": "array (mock data)"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tracking/start",
+          "summary": "Start tracking for a delivery (Protected)",
+          "request": {
+            "body": {
+              "deliveryId": "string",
+              "lat": "number",
+              "lng": "number"
+            }
+          },
+          "response": {
+            "200": {
+              "message": "string",
+              "deliveryId": "string",
+              "lat": "number",
+              "lng": "number"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tracking/stop",
+          "summary": "Stop tracking and mark a delivery as delivered (Protected)",
+          "request": {
+            "body": {
+              "deliveryId": "string"
+            }
+          },
+          "response": {
+            "200": {
+              "message": "string",
+              "deliveryId": "string"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tracking/:deliveryId",
+          "summary": "Get tracking history for a delivery (Protected)",
+          "request": {
+            "params": {
+              "deliveryId": "string"
+            }
+          },
+          "response": {
+            "200": {
+              "delivery": "object",
+              "gpsLogs": "array"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/payments/escrow",
+          "summary": "Create a mock escrow payment (Protected, Shipper role)",
+          "request": {
+            "body": {
+              "deliveryId": "string",
+              "amount": "number"
+            }
+          },
+          "response": {
+            "200": {
+              "payment": "object"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/payments/release",
+          "summary": "Release mock escrow funds (Protected, Shipper role)",
+          "request": {
+            "body": {
+              "deliveryId": "string"
+            }
+          },
+          "response": {
+            "200": {
+              "payment": "object"
+            }
+          }
+        }
+      ],
+      "sockets": {
+        "type": "Socket.IO",
+        "endpoint": "ws://localhost:3000/",
+        "authentication": "JWT token via socket.handshake.auth.token or socket.handshake.query.token, deliveryId via socket.handshake.query.deliveryId",
+        "events": {
+          "connection": "Fired when a client connects.",
+          "disconnect": "Fired when a client disconnects.",
+          "sendMessage": {
+            "summary": "Client sends a message",
+            "payload": {
+              "deliveryId": "string",
+              "receiverId": "string",
+              "message": "string"
+            }
+          },
+          "newMessage": {
+            "summary": "Server broadcasts a new message to the chat room",
+            "payload": {
+              "id": "string",
+              "deliveryId": "string",
+              "senderId": "string",
+              "receiverId": "string",
+              "message": "string",
+              "timestamp": "string"
+            }
+          },
+          "recentMessages": "Server sends recent messages upon successful connection to a delivery chat.",
+          "authError": "Server sends error messages related to authentication.",
+          "chatError": "Server sends error messages related to chat operations."
+        }
+      },
+      "models": [
+        {
+          "file": "src/models/Chat.js",
+          "schema": "Chat Mongoose schema definition"
+        },
+        {
+          "file": "src/models/Delivery.js",
+          "schema": "Delivery Mongoose schema definition"
+        },
+        {
+          "file": "src/models/GpsLog.js",
+          "schema": "GpsLog Mongoose schema definition"
+        },
+        {
+          "file": "src/models/Payment.js",
+          "schema": "Payment Mongoose schema definition"
+        },
+        {
+          "file": "src/models/User.js",
+          "schema": "User Mongoose schema definition"
+        }
+      ],
+      "config": [
+        {
+          "file": "src/config/db.js",
+          "summary": "Database connection and environment setup."
+        }
+      ],
+      "utilities": [
+        {
+          "file": "src/utils/apiError.js",
+          "summary": "Custom error class for API responses."
+        },
+        {
+          "file": "src/utils/hash.js",
+          "summary": "Password hashing utilities."
+        },
+        {
+          "file": "src/utils/jwt.js",
+          "summary": "JWT token generation and verification utilities."
+        },
+        {
+          "file": "src/utils/logger.js",
+          "summary": "Logging utilities using Winston."
+        }
+      ],
+      "middlewares": [
+        {
+          "file": "src/middlewares/authMiddleware.js",
+          "summary": "Authentication middleware for protecting routes."
+        },
+        {
+          "file": "src/middlewares/errorHandler.js",
+          "summary": "Global error handling middleware."
+        },
+        {
+          "file": "src/middlewares/loggerMiddleware.js",
+          "summary": "Request logging middleware."
+        },
+        {
+          "file": "src/middlewares/validationMiddleware.js",
+          "summary": "Input validation middleware using Joi."
+        }
+      ],
+      "validation": [
+        {
+          "file": "src/validation/authValidation.js",
+          "schema": "Joi schemas for authentication input validation."
+        },
+        {
+          "file": "src/validation/deliveryValidation.js",
+          "schema": "Joi schemas for delivery input validation."
+        },
+        {
+          "file": "src/validation/paymentValidation.js",
+          "schema": "Joi schemas for payment input validation."
+        }
+      ]
     }
   ]
 }
