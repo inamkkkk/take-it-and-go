@@ -151,6 +151,10 @@
     {
       "file": "src/utils/jwt.js",
       "summary": "Utility functions for JWT (JSON Web Token) generation and verification."
+    },
+    {
+      "file": "src/middlewares/loggerMiddleware.js",
+      "summary": "A middleware function that logs incoming HTTP requests."
     }
   ]
 }
