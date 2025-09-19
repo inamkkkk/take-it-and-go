@@ -709,6 +709,166 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/services/authService.js",
+      "utility": {
+        "summary": "Provides authentication-related functionalities including user signup, login, and password reset."
+      },
+      "functions": [
+        {
+          "name": "signup",
+          "description": "Registers a new user with the provided credentials.",
+          "parameters": [
+            {
+              "name": "userData",
+              "type": "object",
+              "description": "An object containing user registration data.",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "The user's email address."
+                },
+                "phone": {
+                  "type": "string",
+                  "description": "The user's phone number."
+                },
+                "password": {
+                  "type": "string",
+                  "description": "The user's password."
+                },
+                "role": {
+                  "type": "string",
+                  "description": "The role assigned to the user (e.g., 'user', 'admin')."
+                }
+              },
+              "required": [
+                "email",
+                "phone",
+                "password",
+                "role"
+              ]
+            }
+          ],
+          "returns": {
+            "type": "object",
+            "description": "An object containing the newly created user's basic information and an authentication token.",
+            "properties": {
+              "user": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the user."
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The user's email address."
+                  },
+                  "role": {
+                    "type": "string",
+                    "description": "The role assigned to the user."
+                  }
+                }
+              },
+              "token": {
+                "type": "string",
+                "description": "A JSON Web Token (JWT) for user authentication."
+              }
+            }
+          },
+          "throws": [
+            {
+              "error": "ApiError",
+              "statusCode": 400,
+              "description": "Thrown if a user with the provided email or phone number already exists."
+            }
+          ]
+        },
+        {
+          "name": "login",
+          "description": "Authenticates a user based on their email and password.",
+          "parameters": [
+            {
+              "name": "email",
+              "type": "string",
+              "description": "The user's email address."
+            },
+            {
+              "name": "password",
+              "type": "string",
+              "description": "The user's password."
+            }
+          ],
+          "returns": {
+            "type": "object",
+            "description": "An object containing the authenticated user's basic information and an authentication token.",
+            "properties": {
+              "user": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the user."
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The user's email address."
+                  },
+                  "role": {
+                    "type": "string",
+                    "description": "The role assigned to the user."
+                  }
+                }
+              },
+              "token": {
+                "type": "string",
+                "description": "A JSON Web Token (JWT) for user authentication."
+              }
+            }
+          },
+          "throws": [
+            {
+              "error": "ApiError",
+              "statusCode": 401,
+              "description": "Thrown if the provided credentials are invalid (user not found or password mismatch)."
+            }
+          ]
+        },
+        {
+          "name": "resetPassword",
+          "description": "Resets the password for a user identified by their email.",
+          "parameters": [
+            {
+              "name": "email",
+              "type": "string",
+              "description": "The email address of the user whose password needs to be reset."
+            },
+            {
+              "name": "newPassword",
+              "type": "string",
+              "description": "The new password for the user."
+            }
+          ],
+          "returns": {
+            "type": "object",
+            "description": "A success message indicating the password has been reset.",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "Confirmation message."
+              }
+            }
+          },
+          "throws": [
+            {
+              "error": "ApiError",
+              "statusCode": 404,
+              "description": "Thrown if no user is found with the provided email address."
+            }
+          ]
+        }
+      ]
     }
   ]
 }
