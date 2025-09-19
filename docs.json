@@ -1663,6 +1663,265 @@
           "description": "Delegates requests to the payment router."
         }
       ]
+    },
+    {
+      "file": "src/routes/authRoutes.js",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/auth/signup",
+          "summary": "Register a new user (shipper or traveler)",
+          "request": {
+            "body": {
+              "type": "object",
+              "required": [
+                "email",
+                "phone",
+                "password",
+                "role"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "user@example.com"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "+15551234567"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "minLength": 6,
+                  "example": "password123"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "shipper",
+                    "traveler"
+                  ],
+                  "example": "shipper"
+                }
+              }
+            }
+          },
+          "response": {
+            "201": {
+              "description": "User registered successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "656209b5a8e2a2a07c3b8e1a"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "user@example.com"
+                          },
+                          "role": {
+                            "type": "string",
+                            "example": "shipper"
+                          }
+                        }
+                      },
+                      "token": {
+                        "type": "string",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input or user already exists",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "User with this email already exists"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/auth/login",
+          "summary": "Log in a user",
+          "request": {
+            "body": {
+              "type": "object",
+              "required": [
+                "email",
+                "password"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "user@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "password123"
+                }
+              }
+            }
+          },
+          "response": {
+            "200": {
+              "description": "User logged in successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "656209b5a8e2a2a07c3b8e1a"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "user@example.com"
+                          },
+                          "role": {
+                            "type": "string",
+                            "example": "shipper"
+                          }
+                        }
+                      },
+                      "token": {
+                        "type": "string",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Invalid credentials",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "Invalid credentials"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/auth/reset-password",
+          "summary": "Reset user password",
+          "request": {
+            "body": {
+              "type": "object",
+              "required": [
+                "email",
+                "newPassword"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "user@example.com"
+                },
+                "newPassword": {
+                  "type": "string",
+                  "format": "password",
+                  "minLength": 6,
+                  "example": "newPassword123"
+                }
+              }
+            }
+          },
+          "response": {
+            "200": {
+              "description": "Password reset successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Password reset successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }
