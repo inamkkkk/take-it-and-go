@@ -554,6 +554,140 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/validation/deliveryValidation.js",
+      "models": [
+        {
+          "name": "locationSchema",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "lng": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              }
+            },
+            "required": [
+              "address",
+              "lat",
+              "lng"
+            ]
+          }
+        },
+        {
+          "name": "createDeliverySchema",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "shipperId": {
+                "type": "string",
+                "description": "MongoDB ObjectId of the shipper"
+              },
+              "pickup": {
+                "$ref": "#/models/locationSchema/schema"
+              },
+              "drop": {
+                "$ref": "#/models/locationSchema/schema"
+              },
+              "itemDescription": {
+                "type": "string",
+                "maxLength": 500
+              },
+              "price": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "shipperId",
+              "pickup",
+              "drop"
+            ]
+          }
+        },
+        {
+          "name": "findMatchesSchema",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "MongoDB ObjectId of the delivery"
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          }
+        },
+        {
+          "name": "startTrackingSchema",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "MongoDB ObjectId of the delivery"
+              },
+              "lat": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "lng": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              }
+            },
+            "required": [
+              "deliveryId",
+              "lat",
+              "lng"
+            ]
+          }
+        },
+        {
+          "name": "stopTrackingSchema",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "MongoDB ObjectId of the delivery"
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          }
+        },
+        {
+          "name": "getTrackingSchema",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "MongoDB ObjectId of the delivery"
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          }
+        }
+      ]
     }
   ]
 }
