@@ -155,6 +155,21 @@
     {
       "file": "src/middlewares/loggerMiddleware.js",
       "summary": "A middleware function that logs incoming HTTP requests."
+    },
+    {
+      "file": "src/middlewares/errorHandler.js",
+      "summary": "Custom error handling middleware to process and format API errors.",
+      "utility": {
+        "description": "This middleware intercepts errors thrown within the application, standardizes them into an 'ApiError' format, and sends a consistent JSON response to the client. It specifically handles common errors like Mongoose CastErrors, duplicate keys, validation errors, and Joi validation errors, translating them into user-friendly messages and appropriate HTTP status codes. For unhandled errors, it defaults to a 500 Internal Server Error.",
+        "details": [
+          "Handles Mongoose 'CastError' (e.g., invalid ObjectId format) with a 404 status.",
+          "Handles Mongoose duplicate key errors (code 11000) with a 400 status.",
+          "Handles Mongoose 'ValidationError' with a 400 status, aggregating validation messages.",
+          "Handles Joi validation errors ('isJoi' property) with a 400 status, aggregating detail messages.",
+          "Logs all errors to the configured logger for debugging purposes.",
+          "Forwards unhandled errors with a default 500 status code."
+        ]
+      }
     }
   ]
 }
