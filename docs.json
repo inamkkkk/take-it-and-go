@@ -1282,6 +1282,216 @@
           ]
         }
       ]
+    },
+    {
+      "file": "src/controllers/authController.js",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/api/auth/signup",
+          "summary": "Register a new user.",
+          "request": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "password"
+              ]
+            }
+          },
+          "response": {
+            "201": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "token": {
+                  "type": "string",
+                  "description": "JWT token for authentication"
+                }
+              }
+            },
+            "400": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "string"
+                }
+              }
+            },
+            "500": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/login",
+          "summary": "Log in a user.",
+          "request": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          },
+          "response": {
+            "200": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "token": {
+                  "type": "string",
+                  "description": "JWT token for authentication"
+                }
+              }
+            },
+            "400": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "string"
+                }
+              }
+            },
+            "500": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/reset-password",
+          "summary": "Reset a user's password.",
+          "request": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "newPassword": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "newPassword"
+              ]
+            }
+          },
+          "response": {
+            "200": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            },
+            "400": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "string"
+                }
+              }
+            },
+            "500": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }
