@@ -348,6 +348,45 @@
           "required": false
         }
       }
+    },
+    {
+      "file": "src/models/Payment.js",
+      "schema": {
+        "deliveryId": {
+          "type": "ObjectId",
+          "ref": "Delivery",
+          "required": true,
+          "description": "Reference to the associated delivery."
+        },
+        "amount": {
+          "type": "Number",
+          "required": true,
+          "min": 0,
+          "description": "The payment amount."
+        },
+        "status": {
+          "type": "String",
+          "enum": [
+            "pending",
+            "completed",
+            "refunded",
+            "failed"
+          ],
+          "default": "pending",
+          "description": "The current status of the payment."
+        },
+        "transactionId": {
+          "type": "String",
+          "unique": true,
+          "sparse": true,
+          "description": "Unique identifier for the transaction from the payment service. Allows null values."
+        },
+        "createdAt": {
+          "type": "Date",
+          "default": "Date.now",
+          "description": "Timestamp when the payment record was created."
+        }
+      }
     }
   ]
 }
