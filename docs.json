@@ -135,6 +135,10 @@
       "file": "src/config/db.js",
       "type": "utility",
       "summary": "Establishes a connection to the MongoDB database using Mongoose."
+    },
+    {
+      "file": "src/utils/logger.js",
+      "summary": "Configuration for the application logger using Winston. This utility sets up logging levels, formats, and transports (files and console for development). It ensures errors are logged with stack traces and messages are formatted for readability and JSON compatibility."
     }
   ]
 }
