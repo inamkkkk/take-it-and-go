@@ -2229,6 +2229,95 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/sockets/chatSocket.js",
+      "summary": "Handles WebSocket connections for real-time chat functionality within specific delivery contexts. It manages user authentication via JWT, room joining based on delivery ID, fetching recent messages, and broadcasting new messages.",
+      "sockets": [
+        {
+          "event": "connection",
+          "summary": "Establishes a new WebSocket connection, performs authentication and authorization for chat access based on a JWT token and delivery ID, joins the user to a delivery-specific chat room, and loads recent messages.",
+          "authentication": {
+            "type": "JWT",
+            "location": "socket.handshake.auth.token (or socket.handshake.query.token)",
+            "validation": "Verifies JWT to obtain userId and userRole.",
+            "deliveryId": {
+              "location": "socket.handshake.query.deliveryId",
+              "validation": "Checks for presence of deliveryId and verifies if the authenticated user (shipper or traveler) is authorized to chat for that delivery."
+            }
+          },
+          "response_on_connection": [
+            {
+              "event": "recentMessages",
+              "description": "Emits a list of the 50 most recent chat messages for the delivery upon successful connection and authentication.",
+              "payload": [
+                {
+                  "id": "string",
+                  "deliveryId": "string",
+                  "senderId": "string",
+                  "receiverId": "string",
+                  "message": "string",
+                  "timestamp": "date",
+                  "senderEmail": "string",
+                  "receiverEmail": "string"
+                }
+              ]
+            },
+            {
+              "event": "authError",
+              "description": "Emits an error message if authentication or setup fails.",
+              "payload": {
+                "message": "string"
+              }
+            }
+          ],
+          "listeners": [
+            {
+              "event": "sendMessage",
+              "summary": "Handles incoming chat messages from a connected client. It validates the message, stores it in the database, and broadcasts it to all users in the relevant delivery chat room.",
+              "request": {
+                "payload": {
+                  "receiverId": "string",
+                  "message": "string"
+                }
+              },
+              "response_on_event": [
+                {
+                  "event": "newMessage",
+                  "description": "Broadcasts the newly sent message to all clients in the delivery chat room.",
+                  "payload": {
+                    "id": "string",
+                    "deliveryId": "string",
+                    "senderId": "string",
+                    "receiverId": "string",
+                    "message": "string",
+                    "timestamp": "date",
+                    "senderEmail": "string",
+                    "receiverEmail": "string"
+                  }
+                },
+                {
+                  "event": "chatError",
+                  "description": "Emits an error message if there's an issue sending the message.",
+                  "payload": {
+                    "message": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "event": "disconnect",
+              "summary": "Logs when a socket connection is terminated.",
+              "payload": null
+            },
+            {
+              "event": "error",
+              "summary": "Logs errors occurring on the socket connection.",
+              "payload": null
+            }
+          ]
+        }
+      ]
     }
   ]
 }
