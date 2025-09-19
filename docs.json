@@ -147,6 +147,10 @@
     {
       "file": "src/utils/hash.js",
       "summary": "Utility functions for password hashing and comparison using bcrypt."
+    },
+    {
+      "file": "src/utils/jwt.js",
+      "summary": "Utility functions for JWT (JSON Web Token) generation and verification."
     }
   ]
 }
