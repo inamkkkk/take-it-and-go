@@ -139,6 +139,10 @@
     {
       "file": "src/utils/logger.js",
       "summary": "Configuration for the application logger using Winston. This utility sets up logging levels, formats, and transports (files and console for development). It ensures errors are logged with stack traces and messages are formatted for readability and JSON compatibility."
+    },
+    {
+      "file": "src/utils/apiError.js",
+      "summary": "Custom error class for API-related errors, extending Node.js's built-in Error class. Includes a statusCode property to denote HTTP status codes and an isOperational flag to distinguish from programming errors."
     }
   ]
 }
