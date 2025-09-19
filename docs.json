@@ -1922,6 +1922,43 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/routes/matchRoutes.js",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/match/find",
+          "summary": "Find potential matches for a delivery request",
+          "request": {
+            "body": {
+              "deliveryId": "string (uuid)"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": {
+                "delivery": "{ $ref: '#/components/schemas/Delivery' }",
+                "matches": [
+                  {
+                    "id": "string",
+                    "name": "string",
+                    "rating": "number",
+                    "estimatedRouteOverlap": "string",
+                    "pickupTime": "string (date-time)",
+                    "dropoffTime": "string (date-time)"
+                  }
+                ],
+                "message": "string"
+              }
+            },
+            "401": null,
+            "403": null,
+            "404": null
+          }
+        }
+      ]
     }
   ]
 }
