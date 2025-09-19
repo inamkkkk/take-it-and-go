@@ -1516,6 +1516,79 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/controllers/trackingController.js",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/api/tracking/start",
+          "summary": "Starts tracking for a specific delivery.",
+          "request": {
+            "body": {
+              "deliveryId": "string",
+              "lat": "number",
+              "lng": "number"
+            },
+            "headers": {
+              "Authorization": "Bearer <token>"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": "object"
+            },
+            "500": {
+              "error": "string"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/tracking/stop",
+          "summary": "Stops tracking for a specific delivery.",
+          "request": {
+            "body": {
+              "deliveryId": "string"
+            },
+            "headers": {
+              "Authorization": "Bearer <token>"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": "object"
+            },
+            "500": {
+              "error": "string"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/tracking/:deliveryId",
+          "summary": "Retrieves tracking information for a specific delivery.",
+          "request": {
+            "params": {
+              "deliveryId": "string"
+            },
+            "headers": {
+              "Authorization": "Bearer <token>"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": "object"
+            },
+            "500": {
+              "error": "string"
+            }
+          }
+        }
+      ]
     }
   ]
 }
