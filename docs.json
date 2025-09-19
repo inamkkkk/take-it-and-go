@@ -225,6 +225,61 @@
           "description": "A middleware function with signature (req, res, next)."
         }
       }
+    },
+    {
+      "file": "src/models/User.js",
+      "schema": {
+        "email": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "User's email address",
+          "validation": {
+            "pattern": "/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/",
+            "message": "Please add a valid email"
+          }
+        },
+        "phone": {
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "description": "User's phone number",
+          "validation": {
+            "pattern": "/^[+]?[(]?[0-9]{3}[)]?[-\\s.]?[0-9]{3}[-\\s.]?[0-9]{4,6}$/",
+            "message": "Please add a valid phone number"
+          }
+        },
+        "password": {
+          "type": "string",
+          "required": true,
+          "description": "User's password",
+          "validation": {
+            "minLength": 6,
+            "message": "Password must be at least 6 characters"
+          },
+          "select": false
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "shipper",
+            "traveler"
+          ],
+          "default": "shipper",
+          "description": "User's role within the system"
+        },
+        "createdAt": {
+          "type": "date",
+          "default": "Date.now",
+          "description": "Timestamp of when the user was created"
+        }
+      },
+      "hooks": [
+        {
+          "event": "pre('save')",
+          "description": "Hashes the password before saving the user document to the database."
+        }
+      ]
     }
   ]
 }
