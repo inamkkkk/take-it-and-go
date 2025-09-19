@@ -688,6 +688,27 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/validation/paymentValidation.js",
+      "models": [
+        {
+          "name": "createEscrowSchema",
+          "schema": {
+            "deliveryId": "objectId",
+            "amount": {
+              "type": "number",
+              "min": 0
+            }
+          }
+        },
+        {
+          "name": "releaseFundsSchema",
+          "schema": {
+            "deliveryId": "objectId"
+          }
+        }
+      ]
     }
   ]
 }
