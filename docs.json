@@ -428,6 +428,34 @@
           }
         }
       }
+    },
+    {
+      "file": "src/models/GpsLog.js",
+      "schema": {
+        "GpsLog": {
+          "deliveryId": {
+            "type": "ObjectId",
+            "ref": "Delivery",
+            "required": true,
+            "description": "Reference to the associated Delivery"
+          },
+          "lat": {
+            "type": "Number",
+            "required": true,
+            "description": "Latitude coordinate"
+          },
+          "lng": {
+            "type": "Number",
+            "required": true,
+            "description": "Longitude coordinate"
+          },
+          "timestamp": {
+            "type": "Date",
+            "default": "Date.now",
+            "description": "Timestamp of the GPS log entry"
+          }
+        }
+      }
     }
   ]
 }
