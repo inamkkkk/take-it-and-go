@@ -170,6 +170,42 @@
           "Forwards unhandled errors with a default 500 status code."
         ]
       }
+    },
+    {
+      "file": "src/middlewares/authMiddleware.js",
+      "summary": "Provides middleware functions for authentication and authorization.",
+      "middleware": [
+        {
+          "name": "protect",
+          "summary": "Protects routes by verifying JWT tokens and attaching user information to the request object.",
+          "description": "This middleware checks for a JWT token in the 'Authorization' header (Bearer schema). If a valid token is found, it verifies the token, retrieves the associated user from the database, and attaches the user object (excluding the password) to `req.user`. If the token is missing, invalid, or the user is not found, it returns an appropriate `ApiError`.",
+          "requestHeaders": {
+            "Authorization": "string (Bearer <token>)"
+          },
+          "responsePayloads": {
+            "401": {
+              "error": "string"
+            }
+          }
+        },
+        {
+          "name": "authorize",
+          "summary": "Authorizes routes based on user roles.",
+          "description": "This middleware takes a variable number of roles as arguments. It checks if the authenticated user (`req.user`) has one of the specified roles. If not, it returns a `403 Forbidden` error.",
+          "parameters": [
+            {
+              "name": "roles",
+              "type": "string[]",
+              "description": "An array of allowed user roles."
+            }
+          ],
+          "responsePayloads": {
+            "403": {
+              "error": "string"
+            }
+          }
+        }
+      ]
     }
   ]
 }
