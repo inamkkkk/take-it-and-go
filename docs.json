@@ -1169,6 +1169,119 @@
           ]
         }
       ]
+    },
+    {
+      "file": "src/services/paymentService.js",
+      "summary": "Provides functions to manage payment escrows and fund releases for deliveries.",
+      "utility": [
+        {
+          "function": "createEscrow",
+          "description": "Initiates a mock escrow for a delivery, holding funds until release.  Requires the shipper to create it for a 'pending' or 'matched' delivery.",
+          "params": [
+            {
+              "name": "deliveryId",
+              "type": "string",
+              "description": "The ID of the delivery to create an escrow for."
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "description": "The amount to be held in escrow."
+            },
+            {
+              "name": "userId",
+              "type": "string",
+              "description": "The ID of the user initiating the escrow (must be the shipper)."
+            },
+            {
+              "name": "userRole",
+              "type": "string",
+              "description": "The role of the user initiating the escrow (not strictly enforced in mock)."
+            }
+          ],
+          "returns": {
+            "payment": {
+              "deliveryId": "string",
+              "amount": "number",
+              "status": "string ('pending')",
+              "transactionId": "string",
+              "createdAt": "string (ISO Date)",
+              "updatedAt": "string (ISO Date)",
+              "_id": "string"
+            },
+            "message": "string"
+          },
+          "errors": [
+            {
+              "code": 404,
+              "message": "Delivery not found"
+            },
+            {
+              "code": 403,
+              "message": "Only the shipper can create escrow for this delivery"
+            },
+            {
+              "code": 400,
+              "message": "Escrow cannot be created for a delivery in this state"
+            },
+            {
+              "code": 400,
+              "message": "Escrow already exists and is pending for this delivery"
+            }
+          ]
+        },
+        {
+          "function": "releaseFunds",
+          "description": "Releases funds from escrow for a delivered package. Requires the shipper to trigger it and the delivery to be in a 'delivered' state.",
+          "params": [
+            {
+              "name": "deliveryId",
+              "type": "string",
+              "description": "The ID of the delivery for which to release funds."
+            },
+            {
+              "name": "userId",
+              "type": "string",
+              "description": "The ID of the user initiating the fund release (must be the shipper)."
+            },
+            {
+              "name": "userRole",
+              "type": "string",
+              "description": "The role of the user initiating the fund release (not strictly enforced in mock)."
+            }
+          ],
+          "returns": {
+            "payment": {
+              "deliveryId": "string",
+              "amount": "number",
+              "status": "string ('completed')",
+              "transactionId": "string",
+              "createdAt": "string (ISO Date)",
+              "updatedAt": "string (ISO Date)",
+              "_id": "string"
+            },
+            "message": "string"
+          },
+          "errors": [
+            {
+              "code": 404,
+              "message": "Delivery not found"
+            },
+            {
+              "code": 403,
+              "message": "Only the shipper can release funds for this delivery"
+            },
+            {
+              "code": 404,
+              "message": "No pending escrow found for this delivery"
+            },
+            {
+              "code": 400,
+              "message": "Funds can only be released for a delivered package. Current status: [status]"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
