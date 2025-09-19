@@ -1492,6 +1492,30 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/controllers/matchController.js",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/api/matches",
+          "summary": "Find potential matches for a delivery.",
+          "request": {
+            "body": {
+              "deliveryId": "string"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": "array"
+            },
+            "default": {
+              "error": "string"
+            }
+          }
+        }
+      ]
     }
   ]
 }
