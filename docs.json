@@ -130,6 +130,11 @@
           "handler": "process.on('uncaughtException', (err) => { ... })"
         }
       ]
+    },
+    {
+      "file": "src/config/db.js",
+      "type": "utility",
+      "summary": "Establishes a connection to the MongoDB database using Mongoose."
     }
   ]
 }
