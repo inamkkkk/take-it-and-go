@@ -1959,6 +1959,204 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/routes/trackingRoutes.js",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/tracking/start",
+          "summary": "Start GPS tracking for a delivery",
+          "request": {
+            "body": {
+              "type": "object",
+              "required": [
+                "deliveryId",
+                "lat",
+                "lng"
+              ],
+              "properties": {
+                "deliveryId": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "656209b5a8e2a2a07c3b8e1a"
+                },
+                "lat": {
+                  "type": "number",
+                  "format": "float",
+                  "example": 34.052235
+                },
+                "lng": {
+                  "type": "number",
+                  "format": "float",
+                  "example": -118.243683
+                }
+              }
+            }
+          },
+          "response": {
+            "200": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "deliveryId": {
+                      "type": "string"
+                    },
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lng": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., delivery not in transit, already delivered)"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            },
+            "404": {
+              "description": "Delivery not found"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/tracking/stop",
+          "summary": "Stop GPS tracking for a delivery and mark as delivered",
+          "request": {
+            "body": {
+              "type": "object",
+              "required": [
+                "deliveryId"
+              ],
+              "properties": {
+                "deliveryId": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "656209b5a8e2a2a07c3b8e1a"
+                }
+              }
+            }
+          },
+          "response": {
+            "200": {
+              "description": "Tracking stopped and delivery marked as delivered",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string"
+                          },
+                          "deliveryId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., delivery not in transit)"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            },
+            "404": {
+              "description": "Delivery not found"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/tracking/:deliveryId",
+          "summary": "Get GPS tracking history for a delivery",
+          "request": {
+            "params": {
+              "deliveryId": {
+                "type": "string",
+                "format": "uuid",
+                "required": true,
+                "description": "ID of the delivery to track"
+              }
+            }
+          },
+          "response": {
+            "200": {
+              "description": "GPS tracking data retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "delivery": {
+                            "$ref": "#/components/schemas/Delivery"
+                          },
+                          "gpsLogs": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/GpsLog"
+                            }
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "Tracking data retrieved successfully."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            },
+            "404": {
+              "description": "Delivery not found"
+            }
+          }
+        }
+      ]
     }
   ]
 }
