@@ -387,6 +387,47 @@
           "description": "Timestamp when the payment record was created."
         }
       }
+    },
+    {
+      "file": "src/models/Chat.js",
+      "schema": {
+        "Chat": {
+          "deliveryId": {
+            "type": "ObjectId",
+            "ref": "Delivery",
+            "required": true,
+            "description": "Reference to the Delivery document this chat belongs to."
+          },
+          "senderId": {
+            "type": "ObjectId",
+            "ref": "User",
+            "required": true,
+            "description": "Reference to the User document of the sender."
+          },
+          "receiverId": {
+            "type": "ObjectId",
+            "ref": "User",
+            "required": true,
+            "description": "Reference to the User document of the receiver."
+          },
+          "message": {
+            "type": "string",
+            "required": true,
+            "trim": true,
+            "description": "The content of the chat message."
+          },
+          "timestamp": {
+            "type": "Date",
+            "default": "Date.now",
+            "description": "The timestamp when the message was created."
+          },
+          "read": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indicates whether the message has been read by the receiver."
+          }
+        }
+      }
     }
   ]
 }
