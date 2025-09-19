@@ -3,6 +3,39 @@
     {
       "file": "package.json",
       "summary": "Configuration file for the takeitgo-lite-backend Node.js project. Defines project metadata, scripts for development and production, and lists project dependencies."
+    },
+    {
+      "file": ".env.example",
+      "type": "config",
+      "summary": "Environment variables for application configuration.",
+      "config_variables": [
+        {
+          "name": "PORT",
+          "description": "The port number the application will listen on. Defaults to 3000.",
+          "example": "3000"
+        },
+        {
+          "name": "MONGO_URI",
+          "description": "The connection URI for the MongoDB database.",
+          "example": "mongodb://localhost:27017/takeitgo-lite-db"
+        },
+        {
+          "name": "JWT_SECRET",
+          "description": "The secret key used for signing JSON Web Tokens (JWTs).",
+          "example": "supersecretjwtkey"
+        },
+        {
+          "name": "JWT_EXPIRES_IN",
+          "description": "The expiration time for JWTs. This is a time duration string (e.g., '1h', '7d').",
+          "example": "1h"
+        },
+        {
+          "name": "GOOGLE_MAPS_API_KEY",
+          "description": "Optional: API key for Google Maps integration. Uncomment and provide your key if needed.",
+          "example": "YOUR_GOOGLE_MAPS_API_KEY",
+          "optional": true
+        }
+      ]
     }
   ]
 }
