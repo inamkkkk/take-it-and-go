@@ -986,6 +986,189 @@
           "notes": "This function is a placeholder. The actual implementation will involve complex matching algorithms, potentially including geographic proximity, time availability, and item compatibility. It may also integrate with external APIs like Google Maps."
         }
       ]
+    },
+    {
+      "file": "src/services/trackingService.js",
+      "utility": {
+        "summary": "Provides services for tracking delivery GPS locations and status updates."
+      },
+      "functions": [
+        {
+          "name": "startTracking",
+          "summary": "Initiates tracking for a delivery, setting its status to 'in-transit' and recording the initial GPS location.",
+          "params": [
+            {
+              "name": "deliveryId",
+              "type": "string",
+              "description": "The ID of the delivery to start tracking."
+            },
+            {
+              "name": "userId",
+              "type": "string",
+              "description": "The ID of the user initiating the tracking (typically the traveler)."
+            },
+            {
+              "name": "lat",
+              "type": "number",
+              "description": "The initial latitude of the delivery."
+            },
+            {
+              "name": "lng",
+              "type": "number",
+              "description": "The initial longitude of the delivery."
+            }
+          ],
+          "returns": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "A success message indicating tracking has started."
+              },
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery being tracked."
+              },
+              "lat": {
+                "type": "number",
+                "description": "The initial latitude recorded."
+              },
+              "lng": {
+                "type": "number",
+                "description": "The initial longitude recorded."
+              }
+            }
+          },
+          "errors": [
+            {
+              "status": 404,
+              "description": "Delivery not found."
+            },
+            {
+              "status": 400,
+              "description": "Cannot start tracking a completed or cancelled delivery."
+            }
+          ]
+        },
+        {
+          "name": "stopTracking",
+          "summary": "Stops tracking for a delivery and marks its status as 'delivered'.",
+          "params": [
+            {
+              "name": "deliveryId",
+              "type": "string",
+              "description": "The ID of the delivery to stop tracking."
+            },
+            {
+              "name": "userId",
+              "type": "string",
+              "description": "The ID of the user initiating the stop tracking (typically the traveler)."
+            }
+          ],
+          "returns": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "A success message indicating tracking has stopped and the delivery is marked as delivered."
+              },
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery."
+              }
+            }
+          },
+          "errors": [
+            {
+              "status": 404,
+              "description": "Delivery not found."
+            },
+            {
+              "status": 400,
+              "description": "Delivery is not currently in transit."
+            }
+          ]
+        },
+        {
+          "name": "getTracking",
+          "summary": "Retrieves the tracking history (GPS logs) for a specific delivery.",
+          "params": [
+            {
+              "name": "deliveryId",
+              "type": "string",
+              "description": "The ID of the delivery to retrieve tracking data for."
+            },
+            {
+              "name": "userId",
+              "type": "string",
+              "description": "The ID of the user requesting the tracking data."
+            },
+            {
+              "name": "userRole",
+              "type": "string",
+              "description": "The role of the user requesting the tracking data (e.g., 'shipper', 'traveler')."
+            }
+          ],
+          "returns": {
+            "type": "object",
+            "properties": {
+              "delivery": {
+                "type": "object",
+                "description": "The delivery details.",
+                "properties": {
+                  "_id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "shipperId": {
+                    "type": "string"
+                  },
+                  "travelerId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "gpsLogs": {
+                "type": "array",
+                "description": "An array of GPS log objects for the delivery, sorted by timestamp.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "deliveryId": {
+                      "type": "string"
+                    },
+                    "lat": {
+                      "type": "number"
+                    },
+                    "lng": {
+                      "type": "number"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              },
+              "message": {
+                "type": "string",
+                "description": "A success message indicating tracking data was retrieved."
+              }
+            }
+          },
+          "errors": [
+            {
+              "status": 404,
+              "description": "Delivery not found."
+            }
+          ]
+        }
+      ]
     }
   ]
 }
