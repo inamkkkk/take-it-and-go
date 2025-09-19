@@ -206,6 +206,25 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/middlewares/validationMiddleware.js",
+      "summary": "Middleware for validating request bodies against Joi schemas.",
+      "utility": {
+        "name": "validate",
+        "description": "Creates a validation middleware for a given Joi schema. It validates the request body, updates it with the validated and stripped value, and passes it to the next middleware or route handler. If validation fails, it passes the Joi error to the error handler.",
+        "parameters": [
+          {
+            "name": "schema",
+            "type": "Joi.Schema",
+            "description": "The Joi schema to validate the request body against."
+          }
+        ],
+        "returns": {
+          "type": "function",
+          "description": "A middleware function with signature (req, res, next)."
+        }
+      }
     }
   ]
 }
