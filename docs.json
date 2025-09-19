@@ -280,6 +280,74 @@
           "description": "Hashes the password before saving the user document to the database."
         }
       ]
+    },
+    {
+      "file": "src/models/Delivery.js",
+      "schema": {
+        "shipperId": {
+          "type": "ObjectId",
+          "ref": "User",
+          "required": true
+        },
+        "travelerId": {
+          "type": "ObjectId",
+          "ref": "User",
+          "default": null
+        },
+        "pickup": {
+          "type": "Object",
+          "required": true,
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          }
+        },
+        "drop": {
+          "type": "Object",
+          "required": true,
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "matched",
+            "in-transit",
+            "delivered",
+            "cancelled"
+          ],
+          "default": "pending"
+        },
+        "createdAt": {
+          "type": "Date",
+          "default": "Date.now"
+        },
+        "itemDescription": {
+          "type": "string",
+          "required": false
+        },
+        "price": {
+          "type": "number",
+          "required": false
+        }
+      }
     }
   ]
 }
