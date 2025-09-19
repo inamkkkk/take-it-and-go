@@ -36,6 +36,100 @@
           "optional": true
         }
       ]
+    },
+    {
+      "file": "server.js",
+      "summary": "Main server file for the Take iT & Go Lite API. Sets up Express, Socket.IO, connects to MongoDB, and defines middleware and routes. Includes error handling and graceful shutdown.",
+      "config": [
+        {
+          "description": "Loads environment variables from a .env file.",
+          "module": "dotenv",
+          "function": "config()"
+        },
+        {
+          "description": "Initializes Express application.",
+          "module": "express"
+        },
+        {
+          "description": "Creates an HTTP server using the Express app.",
+          "module": "http",
+          "function": "createServer(app)"
+        },
+        {
+          "description": "Initializes Socket.IO server with CORS configuration.",
+          "module": "socket.io",
+          "function": "Server(server, { cors: { origin: process.env.CLIENT_URL || \"*\", methods: [\"GET\", \"POST\"] } })"
+        },
+        {
+          "description": "Connects to the MongoDB database.",
+          "module": "./src/config/db",
+          "function": "connectDB()"
+        }
+      ],
+      "middleware": [
+        {
+          "description": "Enables Cross-Origin Resource Sharing.",
+          "module": "cors",
+          "function": "app.use(cors())"
+        },
+        {
+          "description": "Parses incoming JSON requests.",
+          "module": "express",
+          "function": "app.use(express.json())"
+        },
+        {
+          "description": "Parses incoming URL-encoded requests.",
+          "module": "express",
+          "function": "app.use(express.urlencoded({ extended: true }))"
+        },
+        {
+          "description": "Logs incoming requests.",
+          "module": "./src/middlewares/loggerMiddleware",
+          "function": "app.use(loggerMiddleware)"
+        },
+        {
+          "description": "Handles all unhandled errors centrally.",
+          "module": "./src/middlewares/errorHandler",
+          "function": "app.use(errorHandler)"
+        }
+      ],
+      "routes": [
+        {
+          "method": "GET",
+          "path": "/",
+          "summary": "Health check endpoint for the API.",
+          "response": {
+            "200": {
+              "message": "Take iT & Go Lite API is running!"
+            }
+          }
+        },
+        {
+          "method": "USE",
+          "path": "/api",
+          "summary": "Mounts all API routes defined in ./src/routes.",
+          "description": "All subsequent API requests will be routed through this path."
+        }
+      ],
+      "sockets": [
+        {
+          "description": "Initializes and registers the chat socket handler.",
+          "module": "./src/sockets/chatSocket",
+          "function": "chatSocketHandler(io)"
+        }
+      ],
+      "eventHandlers": [
+        {
+          "event": "unhandledRejection",
+          "description": "Logs unhandled promise rejections and gracefully shuts down the server.",
+          "handler": "process.on('unhandledRejection', (err, promise) => { ... })"
+        },
+        {
+          "event": "uncaughtException",
+          "description": "Logs uncaught exceptions and gracefully shuts down the server.",
+          "handler": "process.on('uncaughtException', (err) => { ... })"
+        }
+      ]
     }
   ]
 }
