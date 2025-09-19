@@ -2157,6 +2157,78 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/routes/paymentRoutes.js",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/payments/escrow",
+          "summary": "Create a mock escrow payment for a delivery",
+          "request": {
+            "headers": {
+              "Authorization": "Bearer <token>"
+            },
+            "body": {
+              "deliveryId": "string (uuid)",
+              "amount": "number"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            },
+            "400": {
+              "error": "string"
+            },
+            "401": {
+              "error": "string"
+            },
+            "403": {
+              "error": "string"
+            },
+            "404": {
+              "error": "string"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/payments/release",
+          "summary": "Release mock escrow funds for a delivered package",
+          "request": {
+            "headers": {
+              "Authorization": "Bearer <token>"
+            },
+            "body": {
+              "deliveryId": "string (uuid)"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            },
+            "400": {
+              "error": "string"
+            },
+            "401": {
+              "error": "string"
+            },
+            "403": {
+              "error": "string"
+            },
+            "404": {
+              "error": "string"
+            }
+          }
+        }
+      ]
     }
   ]
 }
