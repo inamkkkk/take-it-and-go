@@ -1633,6 +1633,36 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/routes/index.js",
+      "summary": "Main API router. Mounts sub-routers for different API modules.",
+      "routes": [
+        {
+          "path": "/auth",
+          "summary": "Authentication related routes.",
+          "method": "USE",
+          "description": "Delegates requests to the authentication router."
+        },
+        {
+          "path": "/match",
+          "summary": "Matching related routes.",
+          "method": "USE",
+          "description": "Delegates requests to the matching router."
+        },
+        {
+          "path": "/tracking",
+          "summary": "Tracking related routes.",
+          "method": "USE",
+          "description": "Delegates requests to the tracking router."
+        },
+        {
+          "path": "/payments",
+          "summary": "Payment related routes.",
+          "method": "USE",
+          "description": "Delegates requests to the payment router."
+        }
+      ]
     }
   ]
 }
