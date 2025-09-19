@@ -1589,6 +1589,50 @@
           }
         }
       ]
+    },
+    {
+      "file": "src/controllers/paymentController.js",
+      "routes": [
+        {
+          "method": "POST",
+          "path": "/api/payments/escrow",
+          "summary": "Creates an escrow payment for a delivery.",
+          "request": {
+            "body": {
+              "deliveryId": "string",
+              "amount": "number"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": "object"
+            },
+            "default": {
+              "error": "string"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/payments/release",
+          "summary": "Releases funds from an escrow payment for a delivery.",
+          "request": {
+            "body": {
+              "deliveryId": "string"
+            }
+          },
+          "response": {
+            "200": {
+              "success": "boolean",
+              "data": "object"
+            },
+            "default": {
+              "error": "string"
+            }
+          }
+        }
+      ]
     }
   ]
 }
