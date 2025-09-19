@@ -869,6 +869,123 @@
           ]
         }
       ]
+    },
+    {
+      "file": "src/services/matchService.js",
+      "utility": {
+        "name": "matchService",
+        "summary": "Provides functionality to find matching deliveries for travelers or travelers for deliveries."
+      },
+      "functions": [
+        {
+          "name": "findMatches",
+          "summary": "Finds suitable matches for a given delivery request based on user role. Currently returns mock data.",
+          "parameters": [
+            {
+              "name": "deliveryId",
+              "type": "string",
+              "description": "The ID of the delivery request to find matches for."
+            },
+            {
+              "name": "userId",
+              "type": "string",
+              "description": "The ID of the user initiating the match request."
+            },
+            {
+              "name": "userRole",
+              "type": "string",
+              "enum": [
+                "shipper",
+                "traveler"
+              ],
+              "description": "The role of the user ('shipper' or 'traveler') to determine matching logic."
+            }
+          ],
+          "returns": {
+            "type": "object",
+            "properties": {
+              "delivery": {
+                "type": "object",
+                "description": "The details of the delivery request.",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "The unique identifier for the delivery."
+                  },
+                  "origin": {
+                    "type": "string",
+                    "description": "The pickup location."
+                  },
+                  "destination": {
+                    "type": "string",
+                    "description": "The drop-off location."
+                  },
+                  "itemDescription": {
+                    "type": "string",
+                    "description": "Description of the item to be delivered."
+                  },
+                  "pickupDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The desired pickup date and time."
+                  },
+                  "deliveryDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The desired delivery date and time."
+                  }
+                }
+              },
+              "matches": {
+                "type": "array",
+                "description": "A list of potential matches.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the matched entity (e.g., traveler ID)."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the matched entity."
+                    },
+                    "rating": {
+                      "type": "number",
+                      "description": "The rating of the matched entity."
+                    },
+                    "estimatedRouteOverlap": {
+                      "type": "string",
+                      "description": "Estimated percentage of route overlap."
+                    },
+                    "pickupTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Estimated pickup time for the match."
+                    },
+                    "dropoffTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Estimated drop-off time for the match."
+                    }
+                  }
+                }
+              },
+              "message": {
+                "type": "string",
+                "description": "A message indicating the current status of the matching logic."
+              }
+            }
+          },
+          "errors": [
+            {
+              "statusCode": 404,
+              "description": "Delivery not found."
+            }
+          ],
+          "notes": "This function is a placeholder. The actual implementation will involve complex matching algorithms, potentially including geographic proximity, time availability, and item compatibility. It may also integrate with external APIs like Google Maps."
+        }
+      ]
     }
   ]
 }
