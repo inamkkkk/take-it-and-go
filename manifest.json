@@ -1,0 +1,355 @@
+{
+  "files": [
+    {
+      "path": "package.json",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": true,
+      "lastRefinedAt": "2025-09-19T21:57:46.311Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": ".env.example",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:47.759Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "server.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:48.893Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/config/db.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:50.240Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/logger.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:51.354Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/apiError.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:52.778Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/hash.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:53.904Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/jwt.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:55.238Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/middlewares/loggerMiddleware.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:56.669Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/middlewares/errorHandler.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:57.926Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/middlewares/authMiddleware.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:57:59.055Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/middlewares/validationMiddleware.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:00.558Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/User.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:01.685Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/Delivery.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:03.644Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/Payment.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:05.062Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/Chat.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:06.743Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/GpsLog.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:12.944Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/validation/authValidation.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:15.390Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/validation/deliveryValidation.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:16.538Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/validation/paymentValidation.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:17.862Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/authService.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:19.104Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/matchService.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:20.424Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/trackingService.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:21.786Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/paymentService.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:23.087Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/authController.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:25.011Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/matchController.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:26.552Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/trackingController.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:28.672Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/paymentController.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:30.073Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/index.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:31.110Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/authRoutes.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:32.512Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/matchRoutes.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:35.801Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/trackingRoutes.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:36.926Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/paymentRoutes.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:38.173Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/sockets/chatSocket.js",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:47.452Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "README.md",
+      "visited": true,
+      "ok": false,
+      "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-light:generateContent: [404 Not Found] models/gemini-2.5-flash-light is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+      "attempts": 3,
+      "documented": false,
+      "lastRefinedAt": "2025-09-19T21:58:48.687Z",
+      "modelUsed": "gemini-2.5-pro"
+    }
+  ],
+  "generatedAt": "2025-09-19T21:57:45.128Z"
+}

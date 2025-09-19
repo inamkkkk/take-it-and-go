@@ -1,0 +1,8 @@
+{
+  "docs": [
+    {
+      "file": "package.json",
+      "summary": "Configuration file for the takeitgo-lite-backend Node.js project. Defines project metadata, scripts for development and production, and lists project dependencies."
+    }
+  ]
+}
