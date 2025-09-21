@@ -17,6 +17,9 @@
     },
     {
       "summary": "Utility function to establish a connection to a MongoDB database using Mongoose. It logs connection success or failure and exits the process if connection fails."
+    },
+    {
+      "summary": "Configuration settings for the application, including environment variables related to Node.js environment, port, database connection, JWT settings, and optional Google Maps API key. This file defines and validates these configuration values."
     }
   ]
 }
