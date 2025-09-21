@@ -3391,6 +3391,85 @@
     },
     {
       "summary": "Wrapper for async route handlers to catch errors and pass them to Express error middleware. This utility is not directly exposed as an API endpoint and does not represent a data model."
+    },
+    {
+      "components": {
+        "schemas": {
+          "SignupRequest": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "User's email address."
+              },
+              "phone": {
+                "type": "string",
+                "pattern": "^\\+?[1-9]\\d{1,14}$",
+                "description": "User's phone number in E.164 format (e.g., +1234567890)."
+              },
+              "password": {
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 30,
+                "description": "User's password (8-30 characters)."
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "shipper",
+                  "traveler"
+                ],
+                "default": "shipper",
+                "description": "The role of the user."
+              }
+            },
+            "required": [
+              "email",
+              "phone",
+              "password"
+            ]
+          },
+          "LoginRequest": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "User's email address."
+              },
+              "password": {
+                "type": "string",
+                "description": "User's password."
+              }
+            },
+            "required": [
+              "email",
+              "password"
+            ]
+          },
+          "ResetPasswordRequest": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "User's email address."
+              },
+              "newPassword": {
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 30,
+                "description": "The new password for the user (8-30 characters)."
+              }
+            },
+            "required": [
+              "email",
+              "newPassword"
+            ]
+          }
+        }
+      }
     }
   ]
 }
