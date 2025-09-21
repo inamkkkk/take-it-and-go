@@ -131,6 +131,171 @@
           }
         }
       }
+    },
+    {
+      "components": {
+        "schemas": {
+          "Delivery": {
+            "type": "object",
+            "properties": {
+              "shipperId": {
+                "type": "string",
+                "description": "ID of the shipper making the delivery request.",
+                "example": "60f1b2b4b3e3e3e3e3e3e3e3"
+              },
+              "travelerId": {
+                "type": "string",
+                "nullable": true,
+                "description": "ID of the traveler assigned to this delivery.",
+                "example": "60f1b2b4b3e3e3e3e3e3e3e4"
+              },
+              "pickup": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "Full address for pickup.",
+                    "example": "123 Main St, Anytown, USA"
+                  },
+                  "coordinates": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "description": "Pickup coordinates in [longitude, latitude] format.",
+                    "example": [
+                      -74.006,
+                      40.7128
+                    ]
+                  }
+                },
+                "required": [
+                  "address"
+                ]
+              },
+              "drop": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "Full address for drop-off.",
+                    "example": "456 Oak Ave, Otherville, USA"
+                  },
+                  "coordinates": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "description": "Drop-off coordinates in [longitude, latitude] format.",
+                    "example": [
+                      -73.9352,
+                      40.8371
+                    ]
+                  }
+                },
+                "required": [
+                  "address"
+                ]
+              },
+              "itemDescription": {
+                "type": "string",
+                "description": "Detailed description of the item to be delivered.",
+                "example": "A delicate antique vase"
+              },
+              "itemWeight": {
+                "type": "number",
+                "format": "float",
+                "description": "Weight of the item in kilograms.",
+                "default": 0,
+                "example": 2.5
+              },
+              "itemDimensions": {
+                "type": "object",
+                "properties": {
+                  "width": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Width of the item in centimeters.",
+                    "example": 30
+                  },
+                  "height": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Height of the item in centimeters.",
+                    "example": 40
+                  },
+                  "depth": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Depth of the item in centimeters.",
+                    "example": 20
+                  }
+                },
+                "description": "Dimensions of the item in centimeters."
+              },
+              "price": {
+                "type": "number",
+                "format": "float",
+                "description": "The price for the delivery service.",
+                "example": 50.75
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "matched",
+                  "in-transit",
+                  "delivered",
+                  "cancelled",
+                  "completed"
+                ],
+                "description": "Current status of the delivery.",
+                "default": "pending"
+              },
+              "requestedPickupTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The preferred time for pickup.",
+                "example": "2023-10-27T10:00:00Z"
+              },
+              "expectedDeliveryTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The estimated time of delivery.",
+                "example": "2023-10-27T14:00:00Z"
+              },
+              "actualDeliveryTime": {
+                "type": "string",
+                "format": "date-time",
+                "nullable": true,
+                "description": "The actual time the delivery was completed.",
+                "example": "2023-10-27T13:45:00Z"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the delivery record was created.",
+                "readOnly": true,
+                "example": "2023-10-26T09:00:00Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the delivery record was last updated.",
+                "readOnly": true,
+                "example": "2023-10-26T11:30:00Z"
+              }
+            },
+            "required": [
+              "shipperId",
+              "pickup",
+              "drop",
+              "itemDescription",
+              "price"
+            ]
+          }
+        }
+      }
     }
   ]
 }
