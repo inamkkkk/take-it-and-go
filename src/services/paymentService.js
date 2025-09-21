@@ -79,6 +79,8 @@ const releaseFunds = async (paymentId, userId) => {
   await payment.save();
 
   // TODO: In a real system, this would trigger the actual payout via a payment gateway.
+  // For example:
+  // await paymentGateway.transfer(payment.amount, delivery.travelerId, { source: 'escrow_account' });
 
   return payment;
 };
