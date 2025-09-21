@@ -8,6 +8,7 @@ const config = require('../config/config');
  * @returns {string} The JWT token.
  */
 const generateToken = (userId, role) => {
+  // TODO: Enhance token generation by potentially including more user details or refresh tokens.
   return jwt.sign({ id: userId, role }, config.jwt.secret, {
     expiresIn: config.jwt.expiresIn
   });
@@ -19,6 +20,7 @@ const generateToken = (userId, role) => {
  * @returns {Object} The decoded token payload.
  */
 const verifyToken = (token) => {
+  // TODO: Implement logic to handle token expiration and potentially refresh tokens.
   return jwt.verify(token, config.jwt.secret);
 };
 
