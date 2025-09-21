@@ -3376,6 +3376,9 @@
     },
     {
       "summary": "This file exports a validation middleware factory function that uses Joi for schema validation. It dynamically applies validation to request parameters, query strings, or request bodies based on the provided schema. If validation fails, it throws an AppError with a BAD_REQUEST status. Otherwise, it assigns the validated values to the request object and proceeds to the next middleware."
+    },
+    {
+      "summary": "Represents a custom error class for application-specific errors, including HTTP status codes and operational flags."
     }
   ]
 }
