@@ -1791,6 +1791,209 @@
           }
         }
       }
+    },
+    {
+      "paths": {
+        "/chat/history": {
+          "get": {
+            "summary": "Retrieve chat messages.",
+            "tags": [
+              "Chat"
+            ],
+            "parameters": [
+              {
+                "name": "deliveryId",
+                "in": "query",
+                "schema": {
+                  "type": "string",
+                  "format": "ObjectId"
+                },
+                "description": "ID of the delivery to get chat history for. Requires authorization as a participant of the delivery.",
+                "required": false
+              },
+              {
+                "name": "senderId",
+                "in": "query",
+                "schema": {
+                  "type": "string",
+                  "format": "ObjectId"
+                },
+                "description": "Sender's user ID for direct chat. Used in conjunction with receiverId.",
+                "required": false
+              },
+              {
+                "name": "receiverId",
+                "in": "query",
+                "schema": {
+                  "type": "string",
+                  "format": "ObjectId"
+                },
+                "description": "Receiver's user ID for direct chat. Used in conjunction with senderId.",
+                "required": false
+              }
+            ],
+            "requestBody": null,
+            "responses": {
+              "200": {
+                "description": "Successfully retrieved chat messages.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ChatMessage"
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Invalid input parameters (e.g., invalid ID format, missing parameters).",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized - User is not authorized to view the requested chat history.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found - Delivery associated with the deliveryId was not found.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error - An unexpected error occurred while fetching chat history.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "ChatMessage": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "format": "ObjectId",
+                "description": "Unique identifier for the chat message."
+              },
+              "deliveryId": {
+                "type": "string",
+                "format": "ObjectId",
+                "description": "ID of the delivery this message is related to."
+              },
+              "senderId": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "ObjectId"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "format": "ObjectId"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ],
+                "description": "The user who sent the message. Can be a string ObjectId or a populated user object."
+              },
+              "receiverId": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "ObjectId"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "format": "ObjectId"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ],
+                "description": "The user who received the message. Can be a string ObjectId or a populated user object."
+              },
+              "message": {
+                "type": "string",
+                "description": "The content of the chat message."
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The time the message was sent."
+              }
+            },
+            "required": [
+              "_id",
+              "senderId",
+              "receiverId",
+              "message",
+              "timestamp"
+            ]
+          }
+        }
+      }
     }
   ]
 }
