@@ -3649,6 +3649,315 @@
           }
         }
       }
+    },
+    {
+      "summary": "Handles WebSocket connections and communication for the chat functionality.",
+      "tags": [
+        "Chat",
+        "WebSocket"
+      ],
+      "description": "This module manages real-time chat interactions over WebSockets. It handles user authentication, joining chat rooms (based on delivery IDs or direct user-to-user conversations), sending and receiving messages, and marking messages as read. It integrates with the Chat model for persistence and uses a JWT for authentication.",
+      "events": [
+        {
+          "name": "connection",
+          "description": "Fired when a new WebSocket client connects. It attempts to authenticate the client using a JWT provided in the connection handshake. If authentication fails or no token is provided, the connection is immediately terminated.",
+          "listeners": [
+            {
+              "name": "joinRoom",
+              "description": "A client-initiated event to join a specific chat room. Accepts data with either `deliveryId` or `otherUserId` to determine the room. Emits `chatHistory` upon successful join.",
+              "parameters": [
+                {
+                  "name": "data",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "deliveryId": {
+                        "type": "string",
+                        "description": "The ID of the delivery to join a chat room for."
+                      },
+                      "otherUserId": {
+                        "type": "string",
+                        "description": "The ID of the other user to initiate a direct chat."
+                      }
+                    },
+                    "oneOf": [
+                      {
+                        "required": [
+                          "deliveryId"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "otherUserId"
+                        ]
+                      }
+                    ],
+                    "description": "Object containing either `deliveryId` or `otherUserId` to define the room."
+                  }
+                },
+                {
+                  "name": "callback",
+                  "description": "A callback function to acknowledge the join request, returning status and room information or an error.",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "ok",
+                          "error"
+                        ]
+                      },
+                      "message": {
+                        "type": "string"
+                      },
+                      "room": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              ],
+              "emits": [
+                {
+                  "name": "chatHistory",
+                  "description": "Sent to the client upon successfully joining a room, containing recent chat messages.",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "room": {
+                        "type": "string",
+                        "description": "The name of the room for which history is provided."
+                      },
+                      "messages": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/ChatMessage"
+                        },
+                        "description": "An array of message objects."
+                      }
+                    },
+                    "required": [
+                      "room",
+                      "messages"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "sendMessage",
+              "description": "A client-initiated event to send a message to a specific room. Saves the message to the database and broadcasts it to all users in the room.",
+              "parameters": [
+                {
+                  "name": "data",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "roomName": {
+                        "type": "string",
+                        "description": "The name of the room to send the message to."
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "The content of the message."
+                      },
+                      "receiverId": {
+                        "type": "string",
+                        "description": "Optional. The ID of the direct receiver if it's a one-on-one chat."
+                      },
+                      "deliveryId": {
+                        "type": "string",
+                        "description": "Optional. The ID of the delivery associated with the message."
+                      }
+                    },
+                    "required": [
+                      "roomName",
+                      "message"
+                    ]
+                  }
+                },
+                {
+                  "name": "callback",
+                  "description": "A callback function to acknowledge the message sending request, returning status and message ID or an error.",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "ok",
+                          "error"
+                        ]
+                      },
+                      "messageId": {
+                        "type": "string",
+                        "description": "The ID of the saved message."
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "status"
+                    ]
+                  }
+                }
+              ],
+              "emits": [
+                {
+                  "name": "receiveMessage",
+                  "description": "Broadcast to all clients in a room when a new message is sent. Contains the details of the sent message, including sender information.",
+                  "schema": {
+                    "$ref": "#/components/schemas/ChatMessage"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "markAsRead",
+              "description": "A client-initiated event to mark a specific message as read by the current user. Updates the message in the database and broadcasts a read status update to the relevant room.",
+              "parameters": [
+                {
+                  "name": "data",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "messageId": {
+                        "type": "string",
+                        "description": "The ID of the message to mark as read."
+                      }
+                    },
+                    "required": [
+                      "messageId"
+                    ]
+                  }
+                },
+                {
+                  "name": "callback",
+                  "description": "A callback function to acknowledge the read marking request, returning status or an error.",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "ok",
+                          "error"
+                        ]
+                      },
+                      "message": {
+                        "type": "string"
+                      },
+                      "alreadyRead": {
+                        "type": "boolean",
+                        "description": "Indicates if the message was already marked as read by this user."
+                      }
+                    },
+                    "required": [
+                      "status"
+                    ]
+                  }
+                }
+              ],
+              "emits": [
+                {
+                  "name": "messageRead",
+                  "description": "Broadcast to a room when a message has been marked as read by a user. Includes the message ID and the ID of the user who read it.",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "messageId": {
+                        "type": "string",
+                        "description": "The ID of the message that was read."
+                      },
+                      "readerId": {
+                        "type": "string",
+                        "description": "The ID of the user who marked the message as read."
+                      }
+                    },
+                    "required": [
+                      "messageId",
+                      "readerId"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "disconnect",
+              "description": "Fired when a WebSocket client disconnects. Includes logic for potential cleanup of user states or online status."
+            },
+            {
+              "name": "error",
+              "description": "Fired when a WebSocket connection encounters an error."
+            }
+          ]
+        }
+      ],
+      "components": {
+        "schemas": {
+          "ChatMessage": {
+            "type": "object",
+            "description": "Represents a single chat message.",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Unique identifier for the message."
+              },
+              "senderId": {
+                "type": "string",
+                "description": "The ID of the user who sent the message."
+              },
+              "receiverId": {
+                "type": "string",
+                "nullable": true,
+                "description": "The ID of the intended recipient (for direct messages)."
+              },
+              "deliveryId": {
+                "type": "string",
+                "nullable": true,
+                "description": "The ID of the delivery associated with this message."
+              },
+              "message": {
+                "type": "string",
+                "description": "The content of the message."
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The date and time the message was sent."
+              },
+              "readBy": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "An array of user IDs who have read the message."
+              },
+              "senderInfo": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  }
+                },
+                "description": "Optional information about the sender."
+              }
+            },
+            "required": [
+              "_id",
+              "senderId",
+              "message",
+              "timestamp",
+              "readBy"
+            ]
+          }
+        }
+      }
     }
   ]
 }
