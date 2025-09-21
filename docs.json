@@ -3344,6 +3344,32 @@
           }
         }
       }
+    },
+    {
+      "summary": "Authentication and Authorization Middleware",
+      "description": "This middleware provides functionality to authenticate users via JWT and authorize access based on roles.",
+      "components": {
+        "schemas": {
+          "AuthenticatedUser": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "The unique identifier of the authenticated user."
+              },
+              "role": {
+                "type": "string",
+                "description": "The role of the authenticated user."
+              }
+            },
+            "required": [
+              "id",
+              "role"
+            ]
+          }
+        }
+      }
     }
   ]
 }
