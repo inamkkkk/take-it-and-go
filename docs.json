@@ -3473,6 +3473,56 @@
     },
     {
       "summary": "Custom Joi validation functions for various data types, including Mongoose ObjectIds, coordinates, and password strength."
+    },
+    {
+      "components": {
+        "schemas": {
+          "FindMatchesBody": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery for which to find matches. Must be a valid MongoDB ObjectId."
+              },
+              "origin": {
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "type": "number",
+                    "description": "The latitude of the origin point."
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "description": "The longitude of the origin point."
+                  }
+                },
+                "description": "The geographical coordinates of the origin point."
+              },
+              "destination": {
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "type": "number",
+                    "description": "The latitude of the destination point."
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "description": "The longitude of the destination point."
+                  }
+                },
+                "description": "The geographical coordinates of the destination point."
+              },
+              "itemType": {
+                "type": "string",
+                "description": "The type of item for the delivery. Used for filtering matches."
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          }
+        }
+      }
     }
   ]
 }
