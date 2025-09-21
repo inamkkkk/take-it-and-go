@@ -32,8 +32,17 @@ const resetPassword = {
   })
 };
 
+// TODO: Implement JWT validation schema if needed, e.g., for refreshing tokens.
+// Example:
+// const refreshToken = {
+//   body: Joi.object().keys({
+//     refreshToken: Joi.string().required()
+//   })
+// };
+
 module.exports = {
   signup,
   login,
   resetPassword
+  // TODO: Add refreshToken export if implemented above
 };
