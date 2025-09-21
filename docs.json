@@ -3523,6 +3523,61 @@
           }
         }
       }
+    },
+    {
+      "components": {
+        "schemas": {
+          "CreateEscrowBody": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery associated with the escrow payment.",
+                "example": "60f4a7d7b2d5a1001f3a3a3a"
+              },
+              "amount": {
+                "type": "number",
+                "description": "The amount to be held in escrow.",
+                "minimum": 0,
+                "example": 100.5
+              }
+            },
+            "required": [
+              "deliveryId",
+              "amount"
+            ],
+            "messages": {
+              "deliveryId": {
+                "any.required": "Delivery ID is required.",
+                "string.pattern.base": "Delivery ID must be a valid ObjectId."
+              },
+              "amount": {
+                "any.required": "Amount is required.",
+                "number.min": "Amount cannot be negative."
+              }
+            }
+          },
+          "ReleaseFundsBody": {
+            "type": "object",
+            "properties": {
+              "paymentId": {
+                "type": "string",
+                "description": "The ID of the payment to release funds from.",
+                "example": "60f4a7d7b2d5a1001f3a3a3a"
+              }
+            },
+            "required": [
+              "paymentId"
+            ],
+            "messages": {
+              "paymentId": {
+                "any.required": "Payment ID is required.",
+                "string.pattern.base": "Payment ID must be a valid ObjectId."
+              }
+            }
+          }
+        }
+      }
     }
   ]
 }
