@@ -3470,6 +3470,9 @@
           }
         }
       }
+    },
+    {
+      "summary": "Custom Joi validation functions for various data types, including Mongoose ObjectIds, coordinates, and password strength."
     }
   ]
 }
