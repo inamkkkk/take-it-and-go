@@ -2,6 +2,7 @@ const Chat = require('../models/Chat');
 const logger = require('../utils/logger');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
+const chatController = require('../controllers/chatController'); // Assuming chatController has getChatHistory
 
 const handleChat = (io) => {
   io.on('connection', (socket) => {
@@ -55,6 +56,14 @@ const handleChat = (io) => {
 
       // TODO: Fetch and send recent chat history for this room to the joining user.
       // This can be done by calling chatController.getChatHistory service logic.
+      try {
+        const history = await chatController.getChatHistory({ roomName, userId: socket.userId, deliveryId, otherUserId });
+        socket.emit('chatHistory', { room: roomName, messages: history });
+      } catch (error) {
+        logger.error(`Error fetching chat history for room ${roomName}: ${error.message}`);
+        // Optionally, inform the user about the error
+        if (callback) callback({ status: 'error', message: 'Failed to load chat history.' });
+      }
     });
 
     socket.on('sendMessage', async (data, callback) => {
@@ -112,9 +121,33 @@ const handleChat = (io) => {
         if (message && !message.readBy.includes(socket.userId)) {
           message.readBy.push(socket.userId);
           await message.save();
-          io.to(message.deliveryId ? `delivery_${message.deliveryId}` : null) // Or direct chat room
-            .emit('messageRead', { messageId, readerId: socket.userId });
+
+          // Determine the room to emit the read status.
+          // For simplicity, we'll assume delivery chats are handled here.
+          // Direct messages would need a different room identification.
+          let targetRoom = null;
+          if (message.deliveryId) {
+            targetRoom = `delivery_${message.deliveryId}`;
+          } else if (message.senderId && message.receiverId) { // Direct message case
+            const participants = [message.senderId.toString(), message.receiverId.toString()].sort();
+            targetRoom = `chat_${participants[0]}_${participants[1]}`;
+          }
+          // If targetRoom is still null, it means we couldn't determine the room,
+          // which might indicate an issue or a type of chat not handled by this logic.
+
+          if (targetRoom) {
+            io.to(targetRoom).emit('messageRead', { messageId, readerId: socket.userId });
+          } else {
+            logger.warn(`Could not determine room for message read status update for message ${messageId}`);
+          }
+
           if (callback) callback({ status: 'ok' });
+        } else if (message && message.readBy.includes(socket.userId)) {
+          // Message was already read by this user, no action needed but acknowledge
+          if (callback) callback({ status: 'ok', alreadyRead: true });
+        } else {
+          // Message not found
+          if (callback) callback({ status: 'error', message: 'Message not found.' });
         }
       } catch (error) {
         logger.error(`Error marking message as read: ${error.message}`);
@@ -125,6 +158,7 @@ const handleChat = (io) => {
     socket.on('disconnect', () => {
       logger.info(`Socket disconnected: ${socket.id}`);
       // TODO: Clean up any active tracking sessions or user states if necessary.
+      // For example, if a user is marked as "online", update their status.
     });
 
     socket.on('error', (err) => {
