@@ -877,6 +877,9 @@
           }
         }
       }
+    },
+    {
+      "summary": "Payment Service - Handles creation and release of escrow payments for deliveries."
     }
   ]
 }
