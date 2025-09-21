@@ -1994,6 +1994,9 @@
           }
         }
       }
+    },
+    {
+      "summary": "This file defines the main router for the application, aggregating all other route modules. It sets up the base paths for authentication, matching, payments, tracking, and chat functionalities. It does not expose any direct endpoints itself but rather delegates to mounted sub-routers."
     }
   ]
 }
