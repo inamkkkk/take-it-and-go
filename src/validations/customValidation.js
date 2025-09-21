@@ -24,7 +24,22 @@ const coordinates = (value, helpers) => {
   return value;
 };
 
+// TODO: Add more custom validations here as needed.
+// For instance, a password strength validator, a unique username validator, etc.
+// Example: Password strength validation
+const passwordStrength = (value, helpers) => {
+  if (value.length < 8) {
+    return helpers.message('password must be at least 8 characters long');
+  }
+  if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+    return helpers.message('password must contain at least one number and one letter');
+  }
+  return value;
+};
+
+
 module.exports = {
   objectId,
-  coordinates
+  coordinates,
+  passwordStrength // Export the new custom validation
 };
