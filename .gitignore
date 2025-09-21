@@ -2,3 +2,12 @@ node_modules/
 .env
 build/
 dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+npm-shrinkwrap.json
+package-lock.json
+yarn.lock
+.DS_Store
