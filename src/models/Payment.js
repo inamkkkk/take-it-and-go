@@ -5,16 +5,19 @@ const paymentSchema = new mongoose.Schema(
     deliveryId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Delivery',
-      required: true
+      required: [true, 'Delivery ID is required for payment.']
     },
     amount: {
       type: Number,
-      required: true,
-      min: 0
+      required: [true, 'Payment amount is required.'],
+      min: [0, 'Payment amount cannot be negative.']
     },
     status: {
       type: String,
-      enum: ['pending', 'completed', 'failed', 'refunded'],
+      enum: {
+        values: ['pending', 'completed', 'failed', 'refunded'],
+        message: '{VALUE} is not a valid payment status.'
+      },
       default: 'pending'
     },
     transactionRef: {
@@ -32,6 +35,21 @@ const paymentSchema = new mongoose.Schema(
     timestamps: true
   }
 );
+
+// TODO: Add pre-save hooks for validation or other logic if needed.
+// For example, you might want to ensure a transactionRef is only set for certain statuses,
+// or to perform some checks before saving.
+
+paymentSchema.pre('save', function(next) {
+  // Example: Ensure transactionRef is not set if status is 'pending' unless it's an update
+  if (this.isModified('transactionRef') && this.status === 'pending' && !this.isNew) {
+    const err = new Error('Transaction reference cannot be modified once payment is pending.');
+    err.name = 'ValidationError';
+    return next(err);
+  }
+  next();
+});
+
 
 const Payment = mongoose.model('Payment', paymentSchema);
 
