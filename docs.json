@@ -2226,6 +2226,347 @@
           }
         }
       }
+    },
+    {
+      "paths": {
+        "/match/my": {
+          "get": {
+            "summary": "Get matches for the authenticated user",
+            "tags": [
+              "Match"
+            ],
+            "parameters": [],
+            "responses": {
+              "200": {
+                "description": "Successful retrieval of matches",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Match"
+                      }
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized - Authentication failed"
+              },
+              "403": {
+                "description": "Forbidden - User role not authorized"
+              }
+            },
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ]
+          }
+        },
+        "/match/find": {
+          "post": {
+            "summary": "Find potential matches for a shipper",
+            "tags": [
+              "Match"
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FindMatchesRequest"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Successful retrieval of potential matches",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PotentialMatch"
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Validation failed"
+              },
+              "401": {
+                "description": "Unauthorized - Authentication failed"
+              },
+              "403": {
+                "description": "Forbidden - User role not authorized"
+              }
+            },
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ]
+          }
+        },
+        "/match/accept/{matchId}": {
+          "post": {
+            "summary": "Accept a match",
+            "tags": [
+              "Match"
+            ],
+            "parameters": [
+              {
+                "name": "matchId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "description": "The ID of the match to accept"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Match successfully accepted",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Match"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Invalid match ID or match already handled"
+              },
+              "401": {
+                "description": "Unauthorized - Authentication failed"
+              },
+              "403": {
+                "description": "Forbidden - User role not authorized"
+              },
+              "404": {
+                "description": "Not Found - Match not found"
+              }
+            },
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ]
+          }
+        },
+        "/match/reject/{matchId}": {
+          "post": {
+            "summary": "Reject a match",
+            "tags": [
+              "Match"
+            ],
+            "parameters": [
+              {
+                "name": "matchId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "description": "The ID of the match to reject"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Match successfully rejected",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Match"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Invalid match ID or match already handled"
+              },
+              "401": {
+                "description": "Unauthorized - Authentication failed"
+              },
+              "403": {
+                "description": "Forbidden - User role not authorized"
+              },
+              "404": {
+                "description": "Not Found - Match not found"
+              }
+            },
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ]
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "Match": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Unique identifier for the match"
+              },
+              "shipperId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "ID of the shipper involved in the match"
+              },
+              "driverId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "ID of the driver involved in the match"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "accepted",
+                  "rejected"
+                ],
+                "description": "Current status of the match"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the match was created"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the match was last updated"
+              }
+            },
+            "required": [
+              "id",
+              "shipperId",
+              "driverId",
+              "status"
+            ]
+          },
+          "FindMatchesRequest": {
+            "type": "object",
+            "properties": {
+              "pickupLocation": {
+                "type": "object",
+                "properties": {
+                  "lat": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Latitude of the pickup location"
+                  },
+                  "lng": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Longitude of the pickup location"
+                  }
+                },
+                "required": [
+                  "lat",
+                  "lng"
+                ],
+                "description": "Pickup location coordinates"
+              },
+              "dropoffLocation": {
+                "type": "object",
+                "properties": {
+                  "lat": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Latitude of the dropoff location"
+                  },
+                  "lng": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Longitude of the dropoff location"
+                  }
+                },
+                "required": [
+                  "lat",
+                  "lng"
+                ],
+                "description": "Dropoff location coordinates"
+              },
+              "weight": {
+                "type": "number",
+                "description": "Weight of the cargo in kilograms"
+              },
+              "dimensions": {
+                "type": "object",
+                "properties": {
+                  "length": {
+                    "type": "number",
+                    "description": "Length of the cargo in meters"
+                  },
+                  "width": {
+                    "type": "number",
+                    "description": "Width of the cargo in meters"
+                  },
+                  "height": {
+                    "type": "number",
+                    "description": "Height of the cargo in meters"
+                  }
+                },
+                "required": [
+                  "length",
+                  "width",
+                  "height"
+                ],
+                "description": "Dimensions of the cargo"
+              }
+            },
+            "required": [
+              "pickupLocation",
+              "dropoffLocation",
+              "weight",
+              "dimensions"
+            ]
+          },
+          "PotentialMatch": {
+            "type": "object",
+            "properties": {
+              "driverId": {
+                "type": "string",
+                "format": "uuid",
+                "description": "ID of the potential driver"
+              },
+              "driverName": {
+                "type": "string",
+                "description": "Name of the potential driver"
+              },
+              "distance": {
+                "type": "number",
+                "format": "float",
+                "description": "Distance from the pickup location to the driver's current location"
+              },
+              "rating": {
+                "type": "number",
+                "format": "float",
+                "description": "Average rating of the driver"
+              }
+            },
+            "required": [
+              "driverId",
+              "driverName",
+              "distance",
+              "rating"
+            ]
+          }
+        }
+      }
     }
   ]
 }
