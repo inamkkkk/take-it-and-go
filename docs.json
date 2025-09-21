@@ -363,6 +363,61 @@
           }
         }
       }
+    },
+    {
+      "components": {
+        "schemas": {
+          "GPSLog": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery associated with this GPS log.",
+                "format": "objectId",
+                "example": "60a7c3e2a7c3e2a7c3e2a7c3"
+              },
+              "userId": {
+                "type": "string",
+                "description": "The ID of the user whose location is being tracked (e.g., traveler).",
+                "format": "objectId",
+                "example": "60a7c3e2a7c3e2a7c3e2a7c3"
+              },
+              "latitude": {
+                "type": "number",
+                "description": "The latitude coordinate of the GPS log.",
+                "example": 34.0522
+              },
+              "longitude": {
+                "type": "number",
+                "description": "The longitude coordinate of the GPS log.",
+                "example": -118.2437
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The timestamp when the GPS log was recorded.",
+                "default": "now"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The timestamp when the GPS log was created (auto-generated)."
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The timestamp when the GPS log was last updated (auto-generated)."
+              }
+            },
+            "required": [
+              "deliveryId",
+              "userId",
+              "latitude",
+              "longitude"
+            ]
+          }
+        }
+      }
     }
   ]
 }
