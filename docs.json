@@ -3382,6 +3382,9 @@
     },
     {
       "summary": "Utility functions for password hashing and comparison using bcrypt."
+    },
+    {
+      "summary": "Utility functions for JSON Web Token (JWT) generation and verification."
     }
   ]
 }
