@@ -11,6 +11,9 @@
     },
     {
       "summary": "This file is the main entry point of the backend application. It sets up the HTTP server, initializes Socket.IO, connects to the database, and handles graceful shutdown and error handling."
+    },
+    {
+      "summary": "Main application file for setting up the Express server, middleware, and routes. It configures logging, CORS, request body parsing, and error handling. It also mounts the main API routes and handles 404 errors for unhandled routes."
     }
   ]
 }
