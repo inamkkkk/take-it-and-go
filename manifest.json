@@ -1,0 +1,425 @@
+{
+  "files": [
+    {
+      "path": "package.json",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": true,
+      "lastRefinedAt": "2025-09-21T22:23:19.432Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": ".env.example",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:23:37.987Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": ".gitignore",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:23:56.088Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/index.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 4,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:24:18.924Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/app.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:24:37.990Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/db/connection.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:24:57.017Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/config/config.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 2,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:25:17.393Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/User.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 2,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:25:38.491Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/Payment.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:25:58.403Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/Delivery.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 2,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:26:19.147Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/Chat.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:26:38.601Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/models/GPSLog.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:26:58.367Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/authService.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:27:20.101Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/matchService.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:27:40.250Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/trackingService.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:28:00.931Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/paymentService.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:28:21.207Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/services/userService.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:28:40.664Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/authController.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:29:00.220Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/matchController.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:29:19.269Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/paymentController.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:29:38.728Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/trackingController.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:29:58.796Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/controllers/chatController.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:30:18.866Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/index.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:30:38.275Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/authRoutes.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:30:57.555Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/matchRoutes.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 2,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:31:17.836Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/trackingRoutes.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 2,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:31:38.180Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/paymentRoutes.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 2,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:31:58.125Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/routes/chatRoutes.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:32:17.345Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/middlewares/authMiddleware.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:32:37.417Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/middlewares/errorHandler.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:32:57.597Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/middlewares/validationMiddleware.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:33:17.278Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/appError.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:33:36.604Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/bcrypt.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 2,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:33:56.811Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/jwt.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:34:16.043Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/logger.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:34:34.926Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/utils/catchAsync.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:34:53.815Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/validations/authValidation.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:35:13.275Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/validations/customValidation.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:35:32.936Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/validations/matchValidation.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:35:51.878Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/validations/paymentValidation.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:36:11.071Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/validations/trackingValidation.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:36:30.244Z",
+      "modelUsed": "gemini-2.5-pro"
+    },
+    {
+      "path": "src/sockets/chatSocket.js",
+      "visited": true,
+      "ok": true,
+      "error": null,
+      "attempts": 1,
+      "documented": false,
+      "lastRefinedAt": "2025-09-21T22:36:52.201Z",
+      "modelUsed": "gemini-2.5-pro"
+    }
+  ],
+  "generatedAt": "2025-09-21T22:23:18.061Z"
+}

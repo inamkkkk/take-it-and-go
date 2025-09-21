@@ -1,0 +1,7 @@
+{
+  "docs": [
+    {
+      "summary": "This file is the package.json manifest for the takeitgo-lite-backend project. It defines project metadata, scripts for development and production, and lists its dependencies and devDependencies."
+    }
+  ]
+}
