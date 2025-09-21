@@ -418,6 +418,9 @@
           }
         }
       }
+    },
+    {
+      "summary": "Authentication service for user management, including signup, login, and password reset functionalities."
     }
   ]
 }
