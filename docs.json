@@ -5,6 +5,9 @@
     },
     {
       "summary": "Environment variables configuration file example. These variables are used to configure the application's settings such as port, database connection, and authentication secrets. Uncomment and set the GOOGLE_MAPS_API_KEY for optional Google Maps integration."
+    },
+    {
+      "summary": "This file is a .gitignore file. It specifies intentionally untracked files that Git should ignore. This is a standard configuration file for Git and does not represent a route, model, utility, or config that can be documented within the OpenAPI specification."
     }
   ]
 }
