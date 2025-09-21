@@ -1449,6 +1449,348 @@
           }
         }
       }
+    },
+    {
+      "paths": {
+        "/tracking/start": {
+          "post": {
+            "summary": "Start tracking a delivery.",
+            "tags": [
+              "Tracking"
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "deliveryId": {
+                        "type": "string",
+                        "description": "The ID of the delivery to start tracking."
+                      }
+                    },
+                    "required": [
+                      "deliveryId"
+                    ]
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Delivery tracking started successfully.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Delivery"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Delivery ID is required or invalid."
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            }
+          }
+        },
+        "/tracking/stop": {
+          "post": {
+            "summary": "Stop tracking a delivery.",
+            "tags": [
+              "Tracking"
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "deliveryId": {
+                        "type": "string",
+                        "description": "The ID of the delivery to stop tracking."
+                      }
+                    },
+                    "required": [
+                      "deliveryId"
+                    ]
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Delivery tracking stopped successfully.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Delivery"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Delivery ID is required or invalid."
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            }
+          }
+        },
+        "/tracking/{deliveryId}": {
+          "get": {
+            "summary": "Get tracking logs for a delivery.",
+            "tags": [
+              "Tracking"
+            ],
+            "parameters": [
+              {
+                "name": "deliveryId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The ID of the delivery to retrieve tracking logs for."
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Tracking logs retrieved successfully.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TrackingLog"
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Delivery ID is required or invalid."
+              },
+              "403": {
+                "description": "Forbidden - User is not authorized to view this tracking data."
+              },
+              "404": {
+                "description": "Not Found - Delivery not found."
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            }
+          }
+        },
+        "/tracking/log-gps": {
+          "post": {
+            "summary": "Log a GPS coordinate for a delivery.",
+            "tags": [
+              "Tracking"
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "deliveryId": {
+                        "type": "string",
+                        "description": "The ID of the delivery to log GPS for."
+                      },
+                      "latitude": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "The latitude coordinate."
+                      },
+                      "longitude": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "The longitude coordinate."
+                      }
+                    },
+                    "required": [
+                      "deliveryId",
+                      "latitude",
+                      "longitude"
+                    ]
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "GPS coordinate logged successfully.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/GpsLog"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Delivery ID, latitude, or longitude is required or invalid."
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "Delivery": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the delivery."
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "PENDING",
+                  "IN_TRANSIT",
+                  "DELIVERED",
+                  "CANCELLED"
+                ],
+                "description": "Current status of the delivery."
+              },
+              "shipperId": {
+                "type": "string",
+                "description": "ID of the user who initiated the delivery."
+              },
+              "travelerId": {
+                "type": "string",
+                "nullable": true,
+                "description": "ID of the traveler assigned to the delivery, if any."
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the delivery was created."
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the delivery was last updated."
+              }
+            },
+            "required": [
+              "id",
+              "status",
+              "shipperId",
+              "createdAt",
+              "updatedAt"
+            ]
+          },
+          "TrackingLog": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the tracking log entry."
+              },
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery this log belongs to."
+              },
+              "userId": {
+                "type": "string",
+                "description": "The ID of the user who performed the action or whose location is logged."
+              },
+              "logType": {
+                "type": "string",
+                "enum": [
+                  "START_TRACKING",
+                  "STOP_TRACKING",
+                  "GPS_UPDATE",
+                  "CUSTOM_EVENT"
+                ],
+                "description": "Type of tracking event."
+              },
+              "latitude": {
+                "type": "number",
+                "format": "float",
+                "nullable": true,
+                "description": "Latitude coordinate, if applicable."
+              },
+              "longitude": {
+                "type": "number",
+                "format": "float",
+                "nullable": true,
+                "description": "Longitude coordinate, if applicable."
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the log entry was created."
+              },
+              "notes": {
+                "type": "string",
+                "nullable": true,
+                "description": "Additional notes for the log entry."
+              }
+            },
+            "required": [
+              "id",
+              "deliveryId",
+              "userId",
+              "logType",
+              "timestamp"
+            ]
+          },
+          "GpsLog": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the GPS log entry."
+              },
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery this GPS log belongs to."
+              },
+              "userId": {
+                "type": "string",
+                "description": "The ID of the traveler who logged the GPS coordinate."
+              },
+              "latitude": {
+                "type": "number",
+                "format": "float",
+                "description": "The logged latitude coordinate."
+              },
+              "longitude": {
+                "type": "number",
+                "format": "float",
+                "description": "The logged longitude coordinate."
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the GPS coordinate was logged."
+              }
+            },
+            "required": [
+              "id",
+              "deliveryId",
+              "userId",
+              "latitude",
+              "longitude",
+              "timestamp"
+            ]
+          }
+        }
+      }
     }
   ]
 }
