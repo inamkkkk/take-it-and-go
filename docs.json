@@ -14,6 +14,9 @@
     },
     {
       "summary": "Main application file for setting up the Express server, middleware, and routes. It configures logging, CORS, request body parsing, and error handling. It also mounts the main API routes and handles 404 errors for unhandled routes."
+    },
+    {
+      "summary": "Utility function to establish a connection to a MongoDB database using Mongoose. It logs connection success or failure and exits the process if connection fails."
     }
   ]
 }
