@@ -19,4 +19,10 @@ defaultRoutes.forEach((route) => {
   router.use(route.path, route.route);
 });
 
+// TODO: Add a root route handler for '/' or a health check endpoint if needed.
+// Example:
+// router.get('/', (req, res) => {
+//   res.status(200).send('API is running');
+// });
+
 module.exports = router;
