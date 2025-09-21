@@ -32,7 +32,28 @@ const gpsLogSchema = new mongoose.Schema(
 );
 
 // Create a 2dsphere index for geospatial queries if needed
+// Note: The current schema doesn't have a 'location' field.
+// If you intend to perform geospatial queries, you might want to add a 'location' field
+// that combines latitude and longitude, or index the existing fields appropriately.
+// For example, to index lat/lng directly:
+gpsLogSchema.index({ latitude: 1, longitude: 1 });
+// If you wanted to use a GeoJSON point for geospatial queries:
+/*
+gpsLogSchema.add({
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number], // [longitude, latitude]
+      required: true
+    }
+  }
+});
 gpsLogSchema.index({ location: '2dsphere' });
+*/
 
 const GPSLog = mongoose.model('GPSLog', gpsLogSchema);
 
