@@ -880,6 +880,9 @@
     },
     {
       "summary": "Payment Service - Handles creation and release of escrow payments for deliveries."
+    },
+    {
+      "summary": "User service functions for fetching and updating user data."
     }
   ]
 }
