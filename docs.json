@@ -3370,6 +3370,9 @@
           }
         }
       }
+    },
+    {
+      "summary": "Express.js error handling middleware. This middleware intercepts errors, categorizes them based on environment (development or production) and error type (e.g., database errors, JWT errors, validation errors), and sends appropriate responses to the client. In development, it sends detailed error information. In production, it sends user-friendly messages for operational errors and generic messages for programming errors, while logging the detailed error for debugging."
     }
   ]
 }
