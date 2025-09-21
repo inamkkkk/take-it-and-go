@@ -2567,6 +2567,477 @@
           }
         }
       }
+    },
+    {
+      "paths": {
+        "/tracking/start": {
+          "post": {
+            "summary": "Start tracking a delivery",
+            "tags": [
+              "Tracking"
+            ],
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ],
+            "requestBody": {
+              "description": "Payload to start tracking a delivery",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StartTrackingPayload"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Tracking started successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Tracking started successfully"
+                        },
+                        "trackingId": {
+                          "type": "string",
+                          "example": "tk_abcdef123456"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "403": {
+                "description": "Forbidden",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/tracking/stop": {
+          "post": {
+            "summary": "Stop tracking a delivery",
+            "tags": [
+              "Tracking"
+            ],
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ],
+            "requestBody": {
+              "description": "Payload to stop tracking a delivery",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StopTrackingPayload"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Tracking stopped successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Tracking stopped successfully"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "403": {
+                "description": "Forbidden",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/tracking/{deliveryId}": {
+          "get": {
+            "summary": "Get tracking information for a delivery",
+            "tags": [
+              "Tracking"
+            ],
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ],
+            "parameters": [
+              {
+                "name": "deliveryId",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "description": "The ID of the delivery to track"
+                },
+                "example": "del_abcdef123456"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Tracking information retrieved successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "deliveryId": {
+                          "type": "string",
+                          "example": "del_abcdef123456"
+                        },
+                        "trackingId": {
+                          "type": "string",
+                          "example": "tk_abcdef123456"
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "started",
+                            "in_progress",
+                            "delivered",
+                            "cancelled"
+                          ],
+                          "example": "in_progress"
+                        },
+                        "currentLocation": {
+                          "type": "object",
+                          "properties": {
+                            "latitude": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 34.052235
+                            },
+                            "longitude": {
+                              "type": "number",
+                              "format": "float",
+                              "example": -118.243683
+                            },
+                            "timestamp": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2023-10-27T10:00:00Z"
+                            }
+                          }
+                        },
+                        "history": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "latitude": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 34.052235
+                              },
+                              "longitude": {
+                                "type": "number",
+                                "format": "float",
+                                "example": -118.243683
+                              },
+                              "timestamp": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2023-10-27T10:00:00Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Not Found",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/tracking/log": {
+          "post": {
+            "summary": "Log GPS coordinates for a delivery",
+            "tags": [
+              "Tracking"
+            ],
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ],
+            "requestBody": {
+              "description": "Payload to log GPS coordinates",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/LogGPSPayload"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "GPS coordinates logged successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "GPS coordinates logged successfully"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "401": {
+                "description": "Unauthorized",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "403": {
+                "description": "Forbidden",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "StartTrackingPayload": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery to start tracking",
+                "example": "del_abcdef123456"
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          },
+          "StopTrackingPayload": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery to stop tracking",
+                "example": "del_abcdef123456"
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          },
+          "LogGPSPayload": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery for which to log GPS coordinates",
+                "example": "del_abcdef123456"
+              },
+              "latitude": {
+                "type": "number",
+                "format": "float",
+                "description": "The latitude coordinate",
+                "example": 34.052235
+              },
+              "longitude": {
+                "type": "number",
+                "format": "float",
+                "description": "The longitude coordinate",
+                "example": -118.243683
+              }
+            },
+            "required": [
+              "deliveryId",
+              "latitude",
+              "longitude"
+            ]
+          },
+          "ErrorResponse": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "A description of the error",
+                "example": "Invalid input provided"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Specific details about the error",
+                "example": [
+                  "deliveryId is a required field"
+                ]
+              }
+            }
+          }
+        }
+      }
     }
   ]
 }
