@@ -3379,6 +3379,9 @@
     },
     {
       "summary": "Represents a custom error class for application-specific errors, including HTTP status codes and operational flags."
+    },
+    {
+      "summary": "Utility functions for password hashing and comparison using bcrypt."
     }
   ]
 }
