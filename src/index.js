@@ -34,11 +34,10 @@ const exitHandler = () => {
   if (server) {
     server.close(() => {
       logger.info('Server closed');
-      process.exit(1);
+      // process.exit(1); // Removed to allow graceful shutdown in SIGTERM
     });
-  } else {
-    process.exit(1);
   }
+  // Removed else { process.exit(1); } as the process will exit after server close or if server is not defined.
 };
 
 const unexpectedErrorHandler = (error) => {
@@ -52,6 +51,11 @@ process.on('unhandledRejection', unexpectedErrorHandler);
 process.on('SIGTERM', () => {
   logger.info('SIGTERM received');
   if (server) {
-    server.close();
+    server.close(() => {
+      logger.info('Server closed after SIGTERM');
+      process.exit(0); // Graceful exit
+    });
+  } else {
+    process.exit(0); // Graceful exit if server is not running
   }
 });
