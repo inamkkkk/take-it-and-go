@@ -1216,6 +1216,239 @@
           }
         }
       }
+    },
+    {
+      "paths": {
+        "/payments/escrow": {
+          "post": {
+            "summary": "Create an escrow payment for a delivery.",
+            "tags": [
+              "Payments"
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "deliveryId": {
+                        "type": "string",
+                        "description": "The ID of the delivery for which the escrow is being created.",
+                        "example": "delivery_abc123"
+                      },
+                      "amount": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "The amount to be held in escrow.",
+                        "example": 100.5
+                      }
+                    },
+                    "required": [
+                      "deliveryId",
+                      "amount"
+                    ]
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "Escrow payment created successfully.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Unique identifier for the payment.",
+                          "example": "payment_xyz789"
+                        },
+                        "deliveryId": {
+                          "type": "string",
+                          "description": "The ID of the delivery associated with this payment.",
+                          "example": "delivery_abc123"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "The amount held in escrow.",
+                          "example": 100.5
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Current status of the payment.",
+                          "example": "pending_escrow"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Timestamp when the payment was created.",
+                          "example": "2023-10-27T10:00:00Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad request. Missing or invalid input.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ApiError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ApiError"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/payments/release": {
+          "post": {
+            "summary": "Release funds from an escrow payment.",
+            "tags": [
+              "Payments"
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "paymentId": {
+                        "type": "string",
+                        "description": "The ID of the payment to release funds from.",
+                        "example": "payment_xyz789"
+                      }
+                    },
+                    "required": [
+                      "paymentId"
+                    ]
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Funds released successfully.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Unique identifier for the payment.",
+                          "example": "payment_xyz789"
+                        },
+                        "deliveryId": {
+                          "type": "string",
+                          "description": "The ID of the delivery associated with this payment.",
+                          "example": "delivery_abc123"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "The amount that was held in escrow.",
+                          "example": 100.5
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Current status of the payment.",
+                          "example": "completed"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Timestamp when the payment was created.",
+                          "example": "2023-10-27T10:00:00Z"
+                        },
+                        "releasedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Timestamp when the funds were released.",
+                          "example": "2023-10-27T11:00:00Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad request. Missing or invalid payment ID.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ApiError"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Payment not found.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ApiError"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error.",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ApiError"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "ApiError": {
+            "type": "object",
+            "properties": {
+              "statusCode": {
+                "type": "integer",
+                "description": "HTTP status code of the error.",
+                "example": 400
+              },
+              "message": {
+                "type": "string",
+                "description": "A human-readable message describing the error.",
+                "example": "Delivery ID is required"
+              },
+              "isOperational": {
+                "type": "boolean",
+                "description": "Indicates if the error is operational (e.g., invalid input, not a bug).",
+                "example": true
+              }
+            },
+            "required": [
+              "statusCode",
+              "message"
+            ]
+          }
+        }
+      }
     }
   ]
 }
