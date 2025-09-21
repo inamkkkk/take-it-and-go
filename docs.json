@@ -296,6 +296,73 @@
           }
         }
       }
+    },
+    {
+      "components": {
+        "schemas": {
+          "Chat": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Unique identifier for the chat message.",
+                "readOnly": true
+              },
+              "senderId": {
+                "type": "string",
+                "description": "ID of the user who sent the message.",
+                "example": "60d5ec49f3b5a3b1f8a2b1c3"
+              },
+              "receiverId": {
+                "type": "string",
+                "description": "ID of the user who received the message.",
+                "example": "60d5ec49f3b5a3b1f8a2b1c4"
+              },
+              "deliveryId": {
+                "type": "string",
+                "description": "Optional ID of the delivery associated with the chat message.",
+                "example": "60d5ec49f3b5a3b1f8a2b1c5"
+              },
+              "message": {
+                "type": "string",
+                "description": "The content of the chat message.",
+                "example": "Hello, where is my delivery?"
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The timestamp when the message was sent.",
+                "readOnly": true
+              },
+              "readBy": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "ID of the user who has read the message."
+                },
+                "description": "List of user IDs who have read the message."
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp of when the chat record was created.",
+                "readOnly": true
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp of when the chat record was last updated.",
+                "readOnly": true
+              }
+            },
+            "required": [
+              "senderId",
+              "receiverId",
+              "message"
+            ]
+          }
+        }
+      }
     }
   ]
 }
