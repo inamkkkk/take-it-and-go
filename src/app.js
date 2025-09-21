@@ -24,6 +24,9 @@ app.use(express.json());
 // Parse URL-encoded request body
 app.use(express.urlencoded({ extended: true }));
 
+// TODO: Implement rate limiting for all incoming requests.
+// TODO: Add a middleware to inject request ID for better logging and tracing.
+
 // API routes
 app.use('/api', routes);
 
