@@ -6,8 +6,7 @@ const httpStatus = require('http-status-codes');
  * Find potential travelers for a delivery based on routes.
  * This is a highly simplified stub for matching logic.
  * @param {string} deliveryId
- * @param {Object} matchCriteria - e.g., origin, destination, time window
- * @returns {Promise<Array>}
+ * @returns {Promise<Object>} An object containing delivery details and potential travelers.
  */
 const findMatches = async (deliveryId) => {
   // TODO: Implement sophisticated route-matching logic.
@@ -26,15 +25,20 @@ const findMatches = async (deliveryId) => {
   }
 
   // For now, return a mock list of potential travelers.
+  // This section is a placeholder for actual matching logic.
+  // In a real implementation, you would query your user/traveler data
+  // and apply matching algorithms based on pickup, drop, and time.
   const mockTravelers = [
     { id: '65e23e4f3a7f8e7b5c1a2d3e', name: 'Alice Traveler', estimatedRoute: 'A-B' },
     { id: '65e23e4f3a7f8e7b5c1a2d3f', name: 'Bob Traveler', estimatedRoute: 'C-D' }
   ];
 
+  // The return structure should be consistent, providing relevant info.
   return {
-    deliveryId: deliveryId,
+    deliveryId: delivery._id, // Use the actual ID from the found delivery
     pickup: delivery.pickup,
     drop: delivery.drop,
+    requestedAt: delivery.requestedAt, // Include relevant delivery details
     potentialTravelers: mockTravelers,
     message: 'Mock matching results. Real matching logic needs to be implemented.'
   };
