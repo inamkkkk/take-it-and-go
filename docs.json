@@ -3038,6 +3038,243 @@
           }
         }
       }
+    },
+    {
+      "paths": {
+        "/escrow": {
+          "post": {
+            "summary": "Create an escrow payment",
+            "tags": [
+              "Payments"
+            ],
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CreateEscrowRequest"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "Escrow payment created successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Escrow"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Invalid input or missing fields"
+              },
+              "401": {
+                "description": "Unauthorized - Authentication failed"
+              },
+              "403": {
+                "description": "Forbidden - User does not have the required role (shipper)"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            }
+          }
+        },
+        "/release": {
+          "post": {
+            "summary": "Release funds from escrow",
+            "tags": [
+              "Payments"
+            ],
+            "security": [
+              {
+                "bearerAuth": []
+              }
+            ],
+            "requestBody": {
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ReleaseFundsRequest"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Funds released successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/components/schemas/Transaction"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request - Invalid input or missing fields"
+              },
+              "401": {
+                "description": "Unauthorized - Authentication failed"
+              },
+              "403": {
+                "description": "Forbidden - User does not have the required role (shipper)"
+              },
+              "404": {
+                "description": "Not Found - Escrow not found"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "CreateEscrowRequest": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "number",
+                "format": "float",
+                "description": "The amount to be held in escrow."
+              },
+              "orderId": {
+                "type": "string",
+                "description": "The ID of the order associated with this escrow."
+              },
+              "recipientId": {
+                "type": "string",
+                "description": "The ID of the recipient of the funds."
+              }
+            },
+            "required": [
+              "amount",
+              "orderId",
+              "recipientId"
+            ]
+          },
+          "Escrow": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The unique identifier for the escrow."
+              },
+              "amount": {
+                "type": "number",
+                "format": "float",
+                "description": "The amount held in escrow."
+              },
+              "orderId": {
+                "type": "string",
+                "description": "The ID of the order associated with this escrow."
+              },
+              "recipientId": {
+                "type": "string",
+                "description": "The ID of the recipient of the funds."
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "PENDING",
+                  "RELEASED",
+                  "CANCELLED"
+                ],
+                "description": "The current status of the escrow."
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The timestamp when the escrow was created."
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The timestamp when the escrow was last updated."
+              }
+            },
+            "required": [
+              "id",
+              "amount",
+              "orderId",
+              "recipientId",
+              "status",
+              "createdAt",
+              "updatedAt"
+            ]
+          },
+          "ReleaseFundsRequest": {
+            "type": "object",
+            "properties": {
+              "escrowId": {
+                "type": "string",
+                "description": "The ID of the escrow to release funds from."
+              }
+            },
+            "required": [
+              "escrowId"
+            ]
+          },
+          "Transaction": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The unique identifier for the transaction."
+              },
+              "escrowId": {
+                "type": "string",
+                "description": "The ID of the escrow this transaction is related to."
+              },
+              "amount": {
+                "type": "number",
+                "format": "float",
+                "description": "The amount of the transaction."
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "DEPOSIT",
+                  "RELEASE"
+                ],
+                "description": "The type of transaction."
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "SUCCESS",
+                  "FAILED"
+                ],
+                "description": "The status of the transaction."
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The timestamp when the transaction was created."
+              }
+            },
+            "required": [
+              "id",
+              "escrowId",
+              "amount",
+              "type",
+              "status",
+              "createdAt"
+            ]
+          }
+        }
+      }
     }
   ]
 }
