@@ -73,6 +73,64 @@
           }
         }
       }
+    },
+    {
+      "components": {
+        "schemas": {
+          "Payment": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Unique identifier for the payment.",
+                "readOnly": true
+              },
+              "deliveryId": {
+                "type": "string",
+                "format": "ObjectId",
+                "description": "Reference to the associated Delivery."
+              },
+              "amount": {
+                "type": "number",
+                "description": "The amount of the payment.",
+                "minimum": 0
+              },
+              "status": {
+                "type": "string",
+                "description": "The current status of the payment.",
+                "enum": [
+                  "pending",
+                  "completed",
+                  "failed",
+                  "refunded"
+                ],
+                "default": "pending"
+              },
+              "transactionRef": {
+                "type": "string",
+                "description": "External payment gateway transaction ID.",
+                "nullable": true
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the payment was created.",
+                "readOnly": true
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp when the payment was last updated.",
+                "readOnly": true
+              }
+            },
+            "required": [
+              "deliveryId",
+              "amount"
+            ]
+          }
+        }
+      }
     }
   ]
 }
