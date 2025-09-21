@@ -3388,6 +3388,9 @@
     },
     {
       "summary": "A simple logger utility. In a production app, consider tools like Winston or Pino."
+    },
+    {
+      "summary": "Wrapper for async route handlers to catch errors and pass them to Express error middleware. This utility is not directly exposed as an API endpoint and does not represent a data model."
     }
   ]
 }
