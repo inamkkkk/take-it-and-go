@@ -22,6 +22,8 @@ const validate = (schema) => (req, res, next) => {
     .validate(object);
 
   if (error) {
+    // TODO: Implement more granular error handling for Joi validation errors.
+    // For now, we'll join all error messages for simplicity.
     const errorMessage = error.details.map((details) => details.message).join(', ');
     return next(new AppError(errorMessage, httpStatus.BAD_REQUEST));
   }
