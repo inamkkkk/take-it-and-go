@@ -2,6 +2,8 @@ const User = require('../models/User');
 const { generateToken } = require('../utils/jwt');
 const AppError = require('../utils/appError');
 const httpStatus = require('http-status-codes');
+const crypto = require('crypto');
+const sendEmail = require('../utils/email'); // Assuming you have an email utility
 
 /**
  * Create a new user (signup)
@@ -9,6 +11,12 @@ const httpStatus = require('http-status-codes');
  * @returns {Promise<Object>}
  */
 const signup = async (userData) => {
+  // TODO: Enhance input validation for signup. Ensure required fields are present and in correct format.
+  // For example, check if userData.email, userData.password, userData.name are provided and valid.
+  if (!userData.name || !userData.email || !userData.password || !userData.phone) {
+    throw new AppError('Missing required user data', httpStatus.BAD_REQUEST);
+  }
+
   if (await User.isEmailTaken(userData.email)) {
     throw new AppError('Email already registered', httpStatus.BAD_REQUEST);
   }
@@ -28,6 +36,11 @@ const signup = async (userData) => {
  * @returns {Promise<Object>}
  */
 const login = async (email, password) => {
+  // TODO: Add input validation for login. Ensure email and password are provided.
+  if (!email || !password) {
+    throw new AppError('Email and password are required', httpStatus.BAD_REQUEST);
+  }
+
   const user = await User.findOne({ email }).select('+password');
 
   if (!user || !(await user.correctPassword(password))) {
@@ -39,35 +52,88 @@ const login = async (email, password) => {
 };
 
 /**
- * Reset user password (stub)
+ * Request password reset
  * @param {string} email
- * @param {string} newPassword
  * @returns {Promise<void>}
  */
-const resetPassword = async (email, newPassword) => {
-  // TODO: Implement actual password reset logic.
-  // This would typically involve:
-  // 1. Generating a password reset token.
-  // 2. Sending the token to the user's email.
-  // 3. User clicks on link with token to set new password.
-  // For this skeleton, we'll just mock a direct reset for now.
-
+const requestPasswordReset = async (email) => {
   const user = await User.findOne({ email });
   if (!user) {
+    // In a real application, you wouldn't want to expose that the email doesn't exist.
+    // Just return a generic success message to prevent enumeration.
+    // For development/skeleton purposes, we can log or throw specific error if needed.
     throw new AppError('User with that email not found', httpStatus.NOT_FOUND);
   }
 
-  // In a real scenario, this would be a secure, token-based process.
-  // For the skeleton, we'll directly update the password (NOT FOR PRODUCTION).
-  user.password = newPassword; // User model's pre-save hook will hash it.
+  // Generate a random reset token
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  user.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+  user.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+  await user.save({ validateBeforeSave: false }); // Disable validation for this specific save
+
+  const resetUrl = `${process.env.APP_URL}/resetPassword/${resetToken}`; // Construct reset URL
+
+  // TODO: Implement actual email sending.
+  // This part assumes a `sendEmail` utility is available.
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: 'Password Reset Request',
+      message: `Hello ${user.name},\n\nWe received a request to reset your password. Please click on the following link to reset your password: ${resetUrl}\n\nIf you did not request this, please ignore this email.\n`,
+      html: `
+        <h1>Password Reset Request</h1>
+        <p>Hello ${user.name},</p>
+        <p>We received a request to reset your password. Please click on the following link to reset your password:</p>
+        <a href="${resetUrl}">${resetUrl}</a>
+        <p>If you did not request this, please ignore this email.</p>
+      `
+    });
+    return { message: 'Password reset email sent successfully.' };
+  } catch (error) {
+    console.error('Error sending password reset email:', error);
+    // Reset token and expiry if email sending fails
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    throw new AppError('Error sending password reset email. Please try again later.', httpStatus.INTERNAL_SERVER_ERROR);
+  }
+};
+
+/**
+ * Reset user password using the reset token
+ * @param {string} resetToken
+ * @param {string} newPassword
+ * @returns {Promise<Object>}
+ */
+const resetPassword = async (resetToken, newPassword) => {
+  // 1. Hash the token
+  const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+  // 2. Find user by token and check if expired
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() }
+  });
+
+  if (!user) {
+    throw new AppError('Invalid or expired reset token', httpStatus.BAD_REQUEST);
+  }
+
+  // 3. Update password
+  user.password = newPassword; // Mongoose pre-save hook will hash the password
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
   await user.save();
 
-  // Return user data (without password) or a success message
-  return { message: 'Password reset successfully (DEVELOPMENT STUB)' };
+  // 4. Log the user in by generating a new token
+  const token = generateToken(user._id, user.role);
+  return { user: user.toObject(), token, message: 'Password reset successfully.' };
 };
 
 module.exports = {
   signup,
   login,
+  requestPasswordReset,
   resetPassword
 };
