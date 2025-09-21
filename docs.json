@@ -3385,6 +3385,9 @@
     },
     {
       "summary": "Utility functions for JSON Web Token (JWT) generation and verification."
+    },
+    {
+      "summary": "A simple logger utility. In a production app, consider tools like Winston or Pino."
     }
   ]
 }
