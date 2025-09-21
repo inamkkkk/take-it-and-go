@@ -3578,6 +3578,77 @@
           }
         }
       }
+    },
+    {
+      "summary": "Validation schemas for tracking-related operations.",
+      "components": {
+        "schemas": {
+          "StartTrackingBody": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery to start tracking."
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          },
+          "StopTrackingBody": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery to stop tracking."
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          },
+          "GetTrackingParams": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery to get tracking information for."
+              }
+            },
+            "required": [
+              "deliveryId"
+            ]
+          },
+          "LogGPSBody": {
+            "type": "object",
+            "properties": {
+              "deliveryId": {
+                "type": "string",
+                "description": "The ID of the delivery to log GPS coordinates for."
+              },
+              "latitude": {
+                "type": "number",
+                "format": "float",
+                "description": "The latitude coordinate.",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "longitude": {
+                "type": "number",
+                "format": "float",
+                "description": "The longitude coordinate.",
+                "minimum": -180,
+                "maximum": 180
+              }
+            },
+            "required": [
+              "deliveryId",
+              "latitude",
+              "longitude"
+            ]
+          }
+        }
+      }
     }
   ]
 }
